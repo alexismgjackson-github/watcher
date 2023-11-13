@@ -1,0 +1,25 @@
+footer {
+  padding: 3rem;
+  text-align: center;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  footer {
+    padding: 3rem 6rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  footer {
+    padding: 3rem 9rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  footer {
+    padding: 3rem 15rem;
+  }
+}

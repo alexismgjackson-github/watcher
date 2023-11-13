@@ -1,0 +1,79 @@
+.search-bar--container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 5rem;
+}
+
+.search-bar--heading {
+  text-align: center;
+}
+
+.search-bar--highlight {
+  color: var(--color-accent);
+  font-size: 4.8rem;
+}
+
+.search-bar--form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.search-results--container {
+  min-height: 8rem;
+}
+
+.search-results--list {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  margin-top: 10rem;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .search-bar--heading {
+    font-size: 5.4rem;
+  }
+  .search-bar--highlight {
+    font-size: 5.4rem;
+  }
+  .movie-card {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+  .movie-card--img {
+    height: 42.5rem;
+    width: 32.5rem;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .search-bar--heading {
+    font-size: 6rem;
+  }
+  .search-bar--highlight {
+    font-size: 6rem;
+  }
+  .search-bar--form {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+  }
+  .search-bar--input {
+    min-width: 32.5rem;
+  }
+  .search-bar--btn,
+  .add-to-list-btn {
+    margin: 0;
+    width: 20rem;
+  }
+  .search-results--list {
+    gap: 10rem;
+    margin-top: 15rem;
+  }
+}

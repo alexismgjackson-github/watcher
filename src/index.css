@@ -1,0 +1,125 @@
+:root {
+  --color-accent: hsl(44, 100%, 50%);
+  --color-dark: hsl(0, 0%, 11%);
+  --color-light: hsl(0, 0%, 95%);
+  --font-family: "Work Sans", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-family);
+  font-size: 62.5%;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+main {
+  padding: 3rem;
+}
+
+img {
+  display: block;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  font-size: 4.8rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+p {
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 3.5rem;
+}
+
+p,
+li {
+  line-height: 2.5rem;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  border-radius: 1rem;
+  border-style: none;
+  font-family: inherit;
+  height: 4rem;
+  padding-left: 2rem;
+}
+
+input:focus {
+  border: 4px solid var(--color-accent);
+  outline: none;
+}
+
+label {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+p,
+span,
+li,
+label,
+input,
+button {
+  font-size: 1.6rem;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  main {
+    padding: 3rem 6rem;
+  }
+  img {
+    margin-right: 2rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  main {
+    padding: 3rem 9rem;
+  }
+  p,
+  span,
+  li,
+  label,
+  input {
+    font-size: 1.8rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  main {
+    padding: 3rem 15rem;
+  }
+}

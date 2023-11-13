@@ -1,0 +1,49 @@
+header {
+  align-items: center;
+  background-color: var(--color-dark);
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+}
+
+.site--logo {
+  align-items: center;
+  color: var(--color-accent);
+  display: flex;
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.site--logo:hover {
+  text-decoration: none;
+}
+
+.site--icon {
+  display: flex;
+  font-size: 4rem;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  header {
+    padding: 3rem 6rem;
+  }
+  .site--logo {
+    font-size: 3.6rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  header {
+    padding: 3rem 9rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  header {
+    padding: 3rem 15rem;
+  }
+}
