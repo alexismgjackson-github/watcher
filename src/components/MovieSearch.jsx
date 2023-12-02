@@ -43,7 +43,7 @@ function MovieSearch() {
             className="search-bar--input"
             type="text"
             name="search"
-            placeholder="i.e. Avengers Endgame"
+            placeholder="i.e. Star Wars"
             value={search}
             onChange={handleSearchInput}
             onKeyUp={searchMovieData}
