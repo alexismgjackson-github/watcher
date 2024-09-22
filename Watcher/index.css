@@ -1,0 +1,373 @@
+:root {
+  --font-logo: "Bowlby One", sans-serif;
+  --font-primary: "Inter", system-ui;
+  --color-extralight: #fff;
+  --color-light: #cccaca;
+  --color-medium: #484848;
+  --color-bold: #23252b;
+  --color-extrabold: #000;
+  --color-highlight: #ffd800;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-extrabold);
+  color: var(--color-extralight);
+  font-family: var(--font-primary);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.6rem;
+}
+
+h3 {
+  font-size: 2.2rem;
+}
+
+p {
+  line-height: 2rem;
+}
+
+p,
+input,
+button,
+label,
+select,
+textarea,
+ul {
+  font-size: 1.6rem;
+}
+
+button {
+  font-weight: 500;
+  transition: 0.25s;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input {
+  background-color: inherit;
+  border: 1px solid var(--color-light);
+  border-radius: 0.5rem;
+  color: var(--color-extralight);
+  padding: 1.75rem 4.5rem;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: var(--color-extrabold); /* delete this later */
+  text-decoration: none;
+}
+
+::placeholder {
+  color: var(--color-light);
+}
+
+:focus {
+  border: 1.75px solid var(--color-highlight);
+  outline: none;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+/* LOGGED OUT VIEW (LOGIN/REGISTER) */
+
+.logged-out-view-login,
+.logged-out-view-register {
+  display: grid;
+  gap: 8rem;
+}
+
+#logged-out-view-login,
+#logged-out-view-register {
+  display: none;
+}
+
+.login-nav,
+.register-nav {
+  background-color: var(--color-bold);
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  color: var(--color-highlight);
+  font-family: var(--font-logo);
+  font-size: 2rem;
+}
+
+.logo:hover {
+  cursor: default;
+}
+
+.authentication-container {
+  padding: 2rem;
+}
+
+.authentication {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.login {
+  gap: 2rem;
+}
+
+.register {
+  gap: 1rem;
+}
+
+.register-heading {
+  margin-bottom: 3rem;
+}
+
+.user-error,
+.email-success,
+.email-error,
+.password-success,
+.password-error {
+  display: none;
+}
+
+.user-auth-message,
+.email-auth-message,
+.password-auth-message {
+  font-size: 1.4rem;
+  padding-left: 0.5rem;
+}
+
+.login-email-input,
+.register-email-input {
+  background-image: url("assets/mail.svg");
+  background-position: 3.5% 50%;
+  background-repeat: no-repeat;
+}
+
+.login-password-input,
+.register-password-input {
+  background-image: url("assets/lock.svg");
+  background-position: 3.5% 50%;
+  background-repeat: no-repeat;
+}
+
+.login-show-password-btn,
+.register-show-password-btn {
+  align-items: center;
+  background-color: inherit;
+  border-style: none;
+  color: var(--color-light);
+  display: flex;
+  font-size: 1.4rem;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.show-password-btn:hover {
+  opacity: 0.75;
+}
+
+.show-password-icon {
+  margin-right: 0.5rem;
+}
+
+.login-btn,
+.signup-btn {
+  background-color: var(--color-highlight);
+  border-radius: 0.5rem;
+  border-style: none;
+  color: var(--color-extrabold);
+  padding: 1.125rem;
+}
+
+.login-btn:hover,
+.signup-btn:hover {
+  opacity: 0.5;
+}
+
+.signup-btn {
+  margin: 1rem 0;
+}
+
+.view-register-auth-btn,
+.view-login-auth-btn {
+  border-style: none;
+  background-color: inherit;
+  color: var(--color-highlight);
+}
+
+.view-register-auth-btn:hover,
+.view-login-auth-btn:hover {
+  opacity: 0.5;
+}
+
+/* LOGGED IN VIEW (SEARCH) */
+
+.logged-in-view {
+  display: grid;
+  gap: 4rem;
+}
+
+#logged-in-view {
+  display: none;
+}
+
+.search-nav {
+  align-items: center;
+  background-color: var(--color-bold);
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+}
+
+.search-logo {
+  color: var(--color-highlight);
+  font-family: var(--font-logo);
+  font-size: 2rem;
+}
+
+.search-logo:hover {
+  cursor: default;
+}
+
+.search-header-nav-btns {
+  align-items: center;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.view-watchlist-btn,
+.logout-btn {
+  background-color: var(--color-bold);
+  border-style: none;
+}
+
+.view-watchlist-btn:hover,
+.logout-btn:hover {
+  opacity: 0.5;
+}
+
+.view-list,
+.logout {
+  color: var(--color-highlight);
+}
+
+.search-container {
+  padding: 2rem;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.search-heading {
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.search-btns {
+  display: flex;
+  gap: 2rem;
+  margin: auto;
+}
+
+.search-bar {
+  background-image: url("assets/search.svg");
+  background-position: 2.125% 50%;
+  background-repeat: no-repeat;
+}
+
+.search-btn,
+.surprise-me-btn {
+  border-radius: 0.5rem;
+  border-style: none;
+  padding: 1.125rem;
+}
+
+.search-btn:hover,
+.surprise-me-btn:hover {
+  opacity: 0.5;
+}
+
+.search-btn {
+  background-color: var(--color-highlight);
+  color: var(--color-extrabold);
+}
+
+.surprise-me-btn {
+  background-color: var(--color-medium);
+  color: var(--color-extralight);
+}
+
+/* LOGGED IN VIEW (WATCHLIST) */
+
+/* MEDIA QUERIES */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .login-header,
+  .search-header,
+  .authentication-container,
+  .search-container {
+    padding: 2rem 12rem;
+  }
+
+  .login-logo {
+    font-size: 2.4rem;
+  }
+
+  .search-logo {
+    font-size: 2.4rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

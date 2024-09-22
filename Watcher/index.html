@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watcher</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+    />
+  </head>
+  <body>
+    <section class="logged-out-view-login" id="logged-out-view-login">
+      <nav class="login-nav">
+        <span class="logo">WATCHER</span>
+      </nav>
+      <div class="authentication-container">
+        <div class="authentication login">
+          <h1 class="login-heading">Log In</h1>
+          <section class="user-auth-container">
+            <div class="user-error" id="user-error">
+              <img
+                src="assets/error.svg"
+                alt="Red circle with exclamation point inside"
+              />
+              <p class="user-auth-message error">
+                This email address does not exist and/or the password is
+                incorrect.
+              </p>
+            </div>
+          </section>
+          <input
+            id="login-email-input"
+            class="login-email-input"
+            type="email"
+            placeholder="Email"
+            aria-label="Enter email"
+            aria-required="true"
+            oninvalid="alert('Please enter a valid email address')"
+            required
+          />
+          <input
+            id="login-password-input"
+            class="login-password-input"
+            type="password"
+            placeholder="Password"
+            pattern=".{8,}"
+            aria-label="Enter password"
+            aria-required="true"
+            oninvalid="alert('Please enter a valid password')"
+            required
+          />
+          <button id="login-show-password-btn" class="login-show-password-btn">
+            <img
+              class="show-password-icon"
+              src="assets/visibility.svg"
+              alt="Eye shaped icon"
+            />
+            Show Password
+          </button>
+          <button
+            id="login-btn"
+            class="login-btn"
+            type="submit"
+            aria-label="Log into account"
+          >
+            Log In
+          </button>
+          <button id="view-register-auth-btn" class="view-register-auth-btn">
+            New User? Register Here
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="logged-out-view-register" id="logged-out-view-register">
+      <nav class="register-nav">
+        <span class="logo">WATCHER</span>
+      </nav>
+      <div class="authentication-container">
+        <div class="authentication register">
+          <h1 class="register-heading">Register</h1>
+          <input
+            id="register-email-input"
+            class="register-email-input"
+            type="email"
+            placeholder="Email"
+            aria-label="Enter email"
+            aria-required="true"
+            oninvalid="alert('Please enter a valid email address')"
+            required
+          />
+          <section class="email-auth-container">
+            <div class="email-success" id="email-success">
+              <img
+                src="assets/success.svg"
+                alt="Green circle with checkmark inside"
+              />
+              <p class="email-auth-message success">
+                Great! Your email address was successfully submitted.
+              </p>
+            </div>
+            <div class="email-error" id="email-error">
+              <img
+                src="assets/error.svg"
+                alt="Red circle with exclamation point inside"
+              />
+              <p class="email-auth-message error">
+                Please enter a valid email address.
+              </p>
+            </div>
+          </section>
+          <input
+            id="register-password-input"
+            class="register-password-input"
+            type="password"
+            placeholder="Password"
+            pattern=".{8,}"
+            title="Must contain at least 8 or more characters"
+            aria-label="Enter password"
+            aria-required="true"
+            oninvalid="alert('Please enter a valid password')"
+            required
+          />
+          <section class="password-auth-container">
+            <div class="password-success" id="password-success">
+              <img
+                src="assets/success.svg"
+                alt="Green circle with checkmark inside"
+              />
+              <p class="password-auth-message success">
+                Great! Your password was successfully submitted.
+              </p>
+            </div>
+            <div class="password-error" id="password-error">
+              <img
+                src="assets/error.svg"
+                alt="Red circle with exclamation point inside"
+              />
+              <p class="password-auth-message error">
+                Your password must contain 8 or more characters.
+              </p>
+            </div>
+          </section>
+          <button
+            id="register-show-password-btn"
+            class="register-show-password-btn"
+          >
+            <img
+              class="show-password-icon"
+              src="assets/visibility.svg"
+              alt="Eye shaped icon"
+            />
+            Show Password
+          </button>
+          <button
+            id="signup-btn"
+            class="signup-btn"
+            type="submit"
+            aria-label="Log into account"
+          >
+            Sign Up
+          </button>
+          <button id="view-login-auth-btn" class="view-login-auth-btn">
+            Already A User? Log In Here
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="logged-in-view" id="logged-in-view">
+      <nav class="search-nav">
+        <div class="search-header-nav-primary">
+          <span class="logo">WATCHER</span>
+        </div>
+        <div class="search-header-nav-secondary">
+          <div class="search-header-nav-btns">
+            <button
+              id="view-watchlist-btn"
+              class="view-watchlist-btn"
+              aria-label="View Watchlist"
+            >
+              <span class="material-symbols-outlined view-list">
+                view_list
+              </span>
+            </button>
+            <button
+              id="logout-btn"
+              class="logout-btn"
+              type="submit"
+              aria-label="Log out of account"
+            >
+              <span class="material-symbols-outlined logout"> logout </span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div class="search-container">
+        <div class="search">
+          <h1 class="search-heading">Find a movie</h1>
+          <input
+            id="search-bar"
+            class="search-bar"
+            type="text"
+            placeholder="i.e. Kill Bill"
+            aria-label="Enter movie title"
+            aria-required="true"
+            required
+          />
+          <div class="search-btns">
+            <button
+              id="search-btn"
+              class="search-btn"
+              aria-label="Search movie title entered"
+            >
+              Search Movie
+            </button>
+            <button
+              id="surprise-me-btn"
+              class="surprise-me-btn"
+              aria-label="Get list of random movies"
+            >
+              Surprise Me
+            </button>
+          </div>
+        </div>
+        <div id="search-results"></div>
+      </div>
+    </section>
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
