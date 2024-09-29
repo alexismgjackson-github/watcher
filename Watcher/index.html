@@ -22,223 +22,204 @@
     />
   </head>
   <body>
-    <section class="logged-out-view-login" id="logged-out-view-login">
-      <nav class="login-nav">
-        <span class="logo">WATCHER</span>
-      </nav>
-      <div class="authentication-container">
-        <div class="authentication login">
-          <h1 class="login-heading">Log In</h1>
-          <section class="user-auth-container">
-            <div class="user-error" id="user-error">
-              <img
-                src="assets/error.svg"
-                alt="Red circle with exclamation point inside"
-              />
-              <p class="user-auth-message error">
-                This email address does not exist and/or the password is
-                incorrect.
-              </p>
-            </div>
-          </section>
-          <input
-            id="login-email-input"
-            class="login-email-input"
-            type="email"
-            placeholder="Email"
-            aria-label="Enter email"
-            aria-required="true"
-            oninvalid="alert('Please enter a valid email address')"
-            required
-          />
-          <input
-            id="login-password-input"
-            class="login-password-input"
-            type="password"
-            placeholder="Password"
-            pattern=".{8,}"
-            aria-label="Enter password"
-            aria-required="true"
-            oninvalid="alert('Please enter a valid password')"
-            required
-          />
-          <button id="login-show-password-btn" class="login-show-password-btn">
-            <img
-              class="show-password-icon"
-              src="assets/visibility.svg"
-              alt="Eye shaped icon"
-            />
-            Show Password
-          </button>
-          <button
-            id="login-btn"
-            class="login-btn"
-            type="submit"
-            aria-label="Log into account"
-          >
-            Log In
-          </button>
-          <button id="view-register-auth-btn" class="view-register-auth-btn">
-            New User? Register Here
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="logged-out-view-register" id="logged-out-view-register">
-      <nav class="register-nav">
-        <span class="logo">WATCHER</span>
-      </nav>
-      <div class="authentication-container">
-        <div class="authentication register">
-          <h1 class="register-heading">Register</h1>
-          <input
-            id="register-email-input"
-            class="register-email-input"
-            type="email"
-            placeholder="Email"
-            aria-label="Enter email"
-            aria-required="true"
-            oninvalid="alert('Please enter a valid email address')"
-            required
-          />
-          <section class="email-auth-container">
-            <div class="email-success" id="email-success">
-              <img
-                src="assets/success.svg"
-                alt="Green circle with checkmark inside"
-              />
-              <p class="email-auth-message success">
-                Great! Your email address was successfully submitted.
-              </p>
-            </div>
-            <div class="email-error" id="email-error">
-              <img
-                src="assets/error.svg"
-                alt="Red circle with exclamation point inside"
-              />
-              <p class="email-auth-message error">
-                Please enter a valid email address.
-              </p>
-            </div>
-          </section>
-          <input
-            id="register-password-input"
-            class="register-password-input"
-            type="password"
-            placeholder="Password"
-            pattern=".{8,}"
-            title="Must contain at least 8 or more characters"
-            aria-label="Enter password"
-            aria-required="true"
-            oninvalid="alert('Please enter a valid password')"
-            required
-          />
-          <section class="password-auth-container">
-            <div class="password-success" id="password-success">
-              <img
-                src="assets/success.svg"
-                alt="Green circle with checkmark inside"
-              />
-              <p class="password-auth-message success">
-                Great! Your password was successfully submitted.
-              </p>
-            </div>
-            <div class="password-error" id="password-error">
-              <img
-                src="assets/error.svg"
-                alt="Red circle with exclamation point inside"
-              />
-              <p class="password-auth-message error">
-                Your password must contain 8 or more characters.
-              </p>
-            </div>
-          </section>
-          <button
-            id="register-show-password-btn"
-            class="register-show-password-btn"
-          >
-            <img
-              class="show-password-icon"
-              src="assets/visibility.svg"
-              alt="Eye shaped icon"
-            />
-            Show Password
-          </button>
-          <button
-            id="signup-btn"
-            class="signup-btn"
-            type="submit"
-            aria-label="Log into account"
-          >
-            Sign Up
-          </button>
-          <button id="view-login-auth-btn" class="view-login-auth-btn">
-            Already A User? Log In Here
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="logged-in-view" id="logged-in-view">
-      <nav class="search-nav">
-        <div class="search-header-nav-primary">
+    <main>
+      <!-- LOGGED OUT VIEW (LOGIN) -->
+      <section class="logged-out-view-login" id="logged-out-view-login">
+        <nav class="login-nav">
           <span class="logo">WATCHER</span>
-        </div>
-        <div class="search-header-nav-secondary">
-          <div class="search-header-nav-btns">
+        </nav>
+        <div class="authentication-container">
+          <div class="authentication login">
+            <h1 class="login-heading">Log In</h1>
+            <section
+              class="user-auth-container"
+              id="user-auth-container"
+            ></section>
+            <input
+              id="login-email-input"
+              class="login-email-input"
+              type="email"
+              placeholder="Email"
+              aria-label="Enter your email"
+              aria-required="true"
+              required
+            />
+            <input
+              id="login-password-input"
+              class="login-password-input"
+              type="password"
+              placeholder="Password"
+              pattern=".{8,}"
+              aria-label="Enter your password"
+              aria-required="true"
+              required
+            />
             <button
-              id="view-watchlist-btn"
-              class="view-watchlist-btn"
-              aria-label="View Watchlist"
+              id="login-show-password-btn"
+              class="login-show-password-btn"
             >
-              <span class="material-symbols-outlined view-list">
-                view_list
-              </span>
+              <img
+                class="show-password-icon"
+                src="assets/visibility.svg"
+                alt="Eye shaped icon"
+              />
+              Show Password
             </button>
             <button
-              id="logout-btn"
-              class="logout-btn"
+              id="login-btn"
+              class="login-btn"
               type="submit"
-              aria-label="Log out of account"
+              aria-label="Log into account"
             >
-              <span class="material-symbols-outlined logout"> logout </span>
+              Log In
+            </button>
+            <button id="view-register-auth-btn" class="view-register-auth-btn">
+              New User? Register Here
             </button>
           </div>
         </div>
-      </nav>
-      <div class="search-container">
-        <div class="search">
-          <h1 class="search-heading">Find a movie</h1>
-          <input
-            id="search-bar"
-            class="search-bar"
-            type="text"
-            placeholder="i.e. Kill Bill"
-            aria-label="Enter movie title"
-            aria-required="true"
-            required
-          />
-          <div class="search-btns">
+      </section>
+      <!-- LOGGED OUT VIEW (REGISTER)-->
+      <section class="logged-out-view-register" id="logged-out-view-register">
+        <nav class="register-nav">
+          <span class="logo">WATCHER</span>
+        </nav>
+        <div class="authentication-container">
+          <div class="authentication register">
+            <h1 class="register-heading">Register</h1>
+            <input
+              id="register-email-input"
+              class="register-email-input"
+              type="email"
+              placeholder="Email"
+              aria-label="Enter a valid email"
+              aria-required="true"
+              required
+            />
+            <section
+              class="email-auth-container"
+              id="email-auth-container"
+            ></section>
+            <input
+              id="register-password-input"
+              class="register-password-input"
+              type="password"
+              placeholder="Password"
+              pattern=".{6,}"
+              aria-label="Enter password - it must contain 6 or more characters"
+              aria-required="true"
+              required
+            />
+            <section
+              class="password-auth-container"
+              id="password-auth-container"
+            ></section>
             <button
-              id="search-btn"
-              class="search-btn"
-              aria-label="Search movie title entered"
+              id="register-show-password-btn"
+              class="register-show-password-btn"
             >
-              Search Movie
+              <img
+                class="show-password-icon"
+                src="assets/visibility.svg"
+                alt="Eye shaped icon"
+              />
+              Show Password
             </button>
             <button
-              id="surprise-me-btn"
-              class="surprise-me-btn"
-              aria-label="Get list of random movies"
+              id="signup-btn"
+              class="signup-btn"
+              type="submit"
+              aria-label="Log into account"
             >
-              Surprise Me
+              Sign Up
+            </button>
+            <button id="view-login-auth-btn" class="view-login-auth-btn">
+              Already A User? Log In Here
             </button>
           </div>
         </div>
-        <div id="search-results"></div>
+      </section>
+      <!-- LOGGED IN VIEW (SEARCH) -->
+      <section class="logged-in-view" id="logged-in-view">
+        <nav class="search-nav">
+          <div class="search-nav-primary">
+            <span class="logo">WATCHER</span>
+          </div>
+          <div class="search-nav-secondary">
+            <div class="search-nav-btns">
+              <button
+                id="view-watchlist-btn"
+                class="view-watchlist-btn"
+                aria-label="View Watchlist"
+              >
+                <span class="material-symbols-outlined view-list">
+                  view_list
+                </span>
+              </button>
+              <button
+                id="logout-btn"
+                class="logout-btn"
+                type="submit"
+                aria-label="Log out of account"
+              >
+                <span class="material-symbols-outlined logout"> logout </span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <div class="search-container">
+          <div class="search">
+            <h1 class="search-heading">Find a movie</h1>
+            <form id="search-form" class="search-form" role="search">
+              <div
+                id="search-bar-message-container"
+                class="search-bar-message-container"
+              ></div>
+              <input
+                id="search-bar"
+                class="search-bar"
+                type="text"
+                placeholder="e.g. Dune"
+                aria-label="Enter a movie title into search bar"
+                aria-required="true"
+                required
+              />
+              <div class="search-btn-container">
+                <button
+                  id="search-btn"
+                  class="search-btn"
+                  aria-label="Search movie title entered into search bar"
+                >
+                  Search Movie
+                </button>
+              </div>
+            </form>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </section>
+    </main>
+    <!-- LOGGED IN VIEW (WATCHLIST - MODAL) -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Watchlist</h2>
+          <button id="close-modal-btn" class="close-modal-btn">
+            <img
+              src="assets/cancel.svg"
+              alt="Close icon"
+              aria-label="Close watchlist modal"
+            />
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul id="watchlist-container" class="watchlist-container">
+            <li>Your watchlist is empty</li>
+          </ul>
+        </div>
       </div>
-    </section>
+    </div>
+
     <script src="index.js" type="module"></script>
   </body>
 </html>
