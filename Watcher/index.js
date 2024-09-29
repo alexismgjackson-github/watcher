@@ -347,9 +347,9 @@ GENRE IDS
       <img class="movie-poster" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" alt="${movie.title}">
     </div>
     <div class="movie-secondary">
-        <h3 class="movie-heading">${movie.title}</h3>
+        <h2 class="movie-heading">${movie.title}</h2>
         <p class="overview">${movie.overview}</p>
-        <button class="movie-btn" id="${movie.id}">Add To Watchlist</button>
+        <button class="search-watchlist-btn" id="${movie.id}">Add To Watchlist</button>
       </div>
     </div>
   </div>

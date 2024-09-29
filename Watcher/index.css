@@ -275,23 +275,27 @@ hr {
 .search-nav-btns {
   align-items: center;
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .view-watchlist-btn,
 .logout-btn {
-  background-color: var(--color-bold);
+  align-items: center;
+  background-color: var(--color-highlight);
+  border-radius: 0.5rem;
   border-style: none;
+  display: flex;
+  padding: 0.25rem;
 }
 
 .view-watchlist-btn:hover,
 .logout-btn:hover {
-  opacity: 0.5;
+  opacity: 0.25;
 }
 
 .view-list,
 .logout {
-  color: var(--color-highlight);
+  color: var(--color-extrabold);
 }
 
 .search-container {
@@ -330,6 +334,8 @@ hr {
   border-radius: 0.5rem;
   border-style: none;
   color: var(--color-extrabold);
+  min-width: 37.5rem;
+  max-width: 60rem;
   padding: 1.125rem;
 }
 
@@ -366,7 +372,7 @@ hr {
   gap: 2rem;
 }
 
-.movie-btn {
+.search-watchlist-btn {
   background-color: var(--color-highlight);
   border-radius: 0.5rem;
   border-style: none;
@@ -375,7 +381,7 @@ hr {
   width: 15rem;
 }
 
-.movie-btn:hover {
+.search-watchlist-btn:hover {
   opacity: 0.5;
 }
 
