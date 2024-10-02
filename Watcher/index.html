@@ -141,7 +141,7 @@
       </section>
       <!-- LOGGED IN VIEW (SEARCH) -->
       <section class="logged-in-view" id="logged-in-view">
-        <nav class="search-nav">
+        <nav class="search-nav" id="search-nav">
           <div class="search-nav-primary">
             <span class="logo">WATCHER</span>
           </div>
@@ -179,7 +179,7 @@
                 id="search-bar"
                 class="search-bar"
                 type="text"
-                placeholder="e.g. Dune"
+                placeholder="e.g. Thunderbolts"
                 aria-label="Enter a movie title into search bar"
                 aria-required="true"
                 required
@@ -203,8 +203,12 @@
     <div id="modal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h2>Watchlist</h2>
-          <button id="close-modal-btn" class="close-modal-btn">
+          <h2>Your Watchlist</h2>
+          <button
+            id="close-modal-btn"
+            class="close-modal-btn"
+            aria-label="Close Watchlist"
+          >
             <img
               src="assets/cancel.svg"
               alt="Close icon"
@@ -214,7 +218,7 @@
         </div>
         <div class="modal-body">
           <ul id="watchlist-container" class="watchlist-container">
-            <li>Your watchlist is empty</li>
+            <li><p class="watchlist-status">Your watchlist is empty</p></li>
           </ul>
         </div>
       </div>

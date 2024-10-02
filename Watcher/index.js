@@ -19,7 +19,9 @@ const firebaseConfig = {
 }; // Firebase configuration
 
 const app = initializeApp(firebaseConfig); // Initialize Firebase
-const auth = getAuth(app); // Get a reference to the service
+const auth = getAuth(app); // Get a reference to the authentication service
+
+// console.log(firebaseConfig.databaseURL);
 
 // === UI - Elements - LOGGED OUT VIEW (LOGIN) === ////
 
@@ -61,11 +63,14 @@ const searchResults = document.getElementById("search-results");
 
 const baseUrl = "https://api.themoviedb.org/";
 const apiKey = "c073b993bfd587ff8250925f5296110a";
+let watchlist = [];
 
 // === UI - Elements - LOGGED IN VIEW (WATCHLIST - MODAL) === ////
 
 const modal = document.getElementById("modal");
 const closeModalBtn = document.getElementById("close-modal-btn");
+let watchlistContainer = document.getElementById("watchlist-container");
+let watchlistArray = JSON.parse(localStorage.getItem("watchlist"));
 
 // === UI - Event listeners - LOGGED OUT VIEW (LOGIN) === ////
 
@@ -91,9 +96,9 @@ viewWatchlistBtn.addEventListener("click", showWatchlistModal);
 
 closeModalBtn.addEventListener("click", closeWatchlistModal);
 
-searchBtn.addEventListener("click", fetchMovies);
+searchBtn.addEventListener("click", handleClickSearch);
 
-// surpriseMeBtn.addEventListener("click", generateMovies);
+document.addEventListener("dblclick", addDataAttributesToWatchlistArray);
 
 // === UI - Event listeners - LOGGED IN VIEW (WATCHLIST - MODAL) === ////
 
@@ -193,7 +198,7 @@ function showUserError() {
     alt="Red circle with exclamation point inside"
     />
     <p class="user-auth-message error">
-      This email address does not exist and/or the password is incorrect.
+      Log-in credentials are invalid. Please try again.
     </p>
   </div>
   `;
@@ -299,70 +304,91 @@ function showLoggedInView() {
   showViewInGrid(viewLoggedIn);
 }
 
-function fetchMovies(event) {
+function handleClickSearch(event) {
   event.preventDefault();
-  console.log("fetching movies from database");
-  searchMovieDatabase(searchBar.value);
+  // console.log("search button clicked!");
+  fetchMovies(searchBar.value);
 }
 
-async function searchMovieDatabase(inputValue) {
-  const url = `${baseUrl}3/search/movie?query=${inputValue}&api_key=${apiKey}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const fetchedMoviesArray = data.results;
+function fetchMovies(inputValue) {
+  fetch(`${baseUrl}3/search/movie?query=${inputValue}&api_key=${apiKey}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const fetchedMovies = data.results;
+      const filteredFetchedMovies = fetchedMovies.filter(
+        (movie) => movie.poster_path && movie.overview
+      );
+      // console.log(filteredFetchedMovies);
+      if (data.total_results > 0) {
+        renderFetchedMoviesHtml(filteredFetchedMovies);
+      } else {
+        // console.log("Zero results found");
+        searchResults.innerHTML = `
+    <p id="search-message" class="search-message">Unable to find what you are looking for. Please try again.</p>
+    `;
+      }
+    });
+}
 
-  /*
-GENRE IDS
-28  Action
-12  Adventure
-16  Animation
-35  Comedy
-80  Crime
-99  Documentary
-18  Drama
-10751   Family
-14  Fantasy
-36  History
-27  Horror
-10402   Music
-9648    Mystery
-10749   Romance
-878 Science Fiction
-10770   TV Movie
-53  Thriller
-10752   War
-37  Western
-*/
-
-  if (data.total_results > 0) {
-    let html = "";
-    console.log(fetchedMoviesArray);
-    const filterFetchedMoviesArray = fetchedMoviesArray.filter(
-      (movie) => movie.poster_path && movie.overview
-    );
-    for (let movie of filterFetchedMoviesArray) {
-      html += `
+function renderFetchedMoviesHtml(searchResultsArray) {
+  let html = "";
+  for (let movie of searchResultsArray) {
+    html += `
   <div class="movie" id="movie">
     <div class="movie-primary">
-      <img class="movie-poster" src="https://image.tmdb.org/t/p/original/${movie.poster_path}" alt="${movie.title}">
+      <img 
+        class="movie-poster"
+        src="https://image.tmdb.org/t/p/original/${movie.poster_path}" 
+        alt="${movie.title} poster">
     </div>
     <div class="movie-secondary">
-        <h2 class="movie-heading">${movie.title}</h2>
-        <p class="overview">${movie.overview}</p>
-        <button class="search-watchlist-btn" id="${movie.id}">Add To Watchlist</button>
+      <h2 class="movie-heading">${movie.title}</h2>
+      <p class="overview">${movie.overview}</p>
+      <div class="movie-btn-container">
+        <button class="add-to-watchlist-btn"
+          id="${movie.id}"
+          data-id="${movie.id}" 
+          data-poster="${movie.poster_path}" 
+          data-title="${movie.title}"
+          data-overview="${movie.overview}"
+          >
+            <img
+                class="add-to-watchlist-icon"
+                src="assets/add.svg"
+                alt="Add To Watchlist"
+            >
+            Watchlist
+        </button>
       </div>
     </div>
   </div>
   <hr>
       `;
-    }
-    searchResults.innerHTML = html;
-    searchBar.value = "";
-  } else {
-    console.log("Zero results found");
-    searchResults.innerHTML = `
-    <p id="search-message" class="search-message">Unable to find what you are looking for. Please try again.</p>
-    `;
+  }
+
+  searchResults.innerHTML = html;
+  searchBar.value = "";
+  // console.log(array);
+}
+
+function addDataAttributesToWatchlistArray(event) {
+  if (event.target.dataset.id) {
+    console.log("Movie added to your watchlist!");
+    alert("Movie added to your watchlist!");
+
+    let dataAttribute = event.target.dataset;
+    const dataObject = {
+      id: dataAttribute.id,
+      poster: dataAttribute.poster,
+      title: dataAttribute.title,
+      overview: dataAttribute.overview,
+    };
+
+    watchlist.push(dataObject);
+    // console.log(watchlist);
+
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    renderMoviesHtmlInWatchlist(watchlist);
   }
 }
 
@@ -376,4 +402,42 @@ function showWatchlistModal() {
 function closeWatchlistModal() {
   hideView(modal);
   document.body.style.overflow = "scroll";
+}
+
+function renderMoviesHtmlInWatchlist(watchlistArray) {
+  let watchlistHtml = "";
+  console.log(watchlistArray);
+
+  for (let movie of watchlistArray) {
+    watchlistHtml += `
+    <li class="watchlist-movie-container" id="watchlist-movie-container">
+      <div class="watchlist-movie" id="watchlist-movie"> 
+        <div class="watchlist-movie-primary">
+          <img 
+          class="watchlist-movie-poster"
+          src="https://image.tmdb.org/t/p/original/${movie.poster}"
+          alt="${movie.title} poster">
+        </div>
+        <div class="watchlist-movie-secondary">
+          <h2 class="watchlist-movie-heading">${movie.title}</h2>
+          <p class="watchlist-overview">${movie.overview}</p>
+          <div class="watchlist-btn-container">
+            <button class="delete-from-watchlist-btn"
+              id="${movie.id}" 
+              data-id="${movie.id}">
+              <img
+                class="delete-from-watchlist-icon"
+                src="assets/delete.svg"
+                alt="Delete From Watchlist"
+              />
+              Watchlist
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+  <hr> 
+      `;
+  }
+  watchlistContainer.innerHTML = watchlistHtml;
 }
