@@ -16,7 +16,7 @@ const firebaseConfig = {
   authDomain: "watcher-d12f5.firebaseapp.com",
   projectId: "watcher-d12f5",
   storageBucket: "watcher-d12f5.appspot.com",
-}; // Firebase configuration
+};
 
 const app = initializeApp(firebaseConfig); // Initialize Firebase
 const auth = getAuth(app); // Get a reference to the authentication service
@@ -67,10 +67,15 @@ let watchlist = [];
 
 // === UI - Elements - LOGGED IN VIEW (WATCHLIST - MODAL) === ////
 
+let watchlistContainer = document.getElementById("watchlist-container");
+let watchlistArray = JSON.parse(localStorage.getItem("watchlist")); // LOCAL STORAGE
 const modal = document.getElementById("modal");
 const closeModalBtn = document.getElementById("close-modal-btn");
-let watchlistContainer = document.getElementById("watchlist-container");
-let watchlistArray = JSON.parse(localStorage.getItem("watchlist"));
+/*
+const deleteFromWatchlistBtn = document.getElementById(
+  "delete-from-watchlist-btn"
+);
+*/
 
 // === UI - Event listeners - LOGGED OUT VIEW (LOGIN) === ////
 
@@ -94,13 +99,13 @@ logoutBtn.addEventListener("click", authSignOut);
 
 viewWatchlistBtn.addEventListener("click", showWatchlistModal);
 
-closeModalBtn.addEventListener("click", closeWatchlistModal);
-
 searchBtn.addEventListener("click", handleClickSearch);
 
-document.addEventListener("dblclick", addDataAttributesToWatchlistArray);
+searchResults.addEventListener("dblclick", addMovieToWatchlist);
 
 // === UI - Event listeners - LOGGED IN VIEW (WATCHLIST - MODAL) === ////
+
+watchlistContainer.addEventListener("dblclick", deleteMoviesFromWatchlist);
 
 closeModalBtn.addEventListener("click", closeWatchlistModal);
 
@@ -276,7 +281,7 @@ function showCreateAccountError() {
     alt="Red circle with exclamation point inside"
     />
     <p class="password-auth-message error">
-      Your password must contain 6 or more characters.
+      Password must contain 6 or more characters.
     </p>
   </div>`;
 }
@@ -316,7 +321,7 @@ function fetchMovies(inputValue) {
     .then((data) => {
       const fetchedMovies = data.results;
       const filteredFetchedMovies = fetchedMovies.filter(
-        (movie) => movie.poster_path && movie.overview
+        (movie) => movie.poster_path && movie.overview && movie.overview
       );
       // console.log(filteredFetchedMovies);
       if (data.total_results > 0) {
@@ -330,9 +335,9 @@ function fetchMovies(inputValue) {
     });
 }
 
-function renderFetchedMoviesHtml(searchResultsArray) {
+function renderFetchedMoviesHtml(searchResultsArr) {
   let html = "";
-  for (let movie of searchResultsArray) {
+  for (let movie of searchResultsArr) {
     html += `
   <div class="movie" id="movie">
     <div class="movie-primary">
@@ -371,7 +376,7 @@ function renderFetchedMoviesHtml(searchResultsArray) {
   // console.log(array);
 }
 
-function addDataAttributesToWatchlistArray(event) {
+function addMovieToWatchlist(event) {
   if (event.target.dataset.id) {
     console.log("Movie added to your watchlist!");
     alert("Movie added to your watchlist!");
@@ -383,11 +388,10 @@ function addDataAttributesToWatchlistArray(event) {
       title: dataAttribute.title,
       overview: dataAttribute.overview,
     };
-
     watchlist.push(dataObject);
     // console.log(watchlist);
 
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCAL STORAGE
     renderMoviesHtmlInWatchlist(watchlist);
   }
 }
@@ -404,11 +408,10 @@ function closeWatchlistModal() {
   document.body.style.overflow = "scroll";
 }
 
-function renderMoviesHtmlInWatchlist(watchlistArray) {
+function renderMoviesHtmlInWatchlist(watchlistArr) {
   let watchlistHtml = "";
-  console.log(watchlistArray);
 
-  for (let movie of watchlistArray) {
+  for (let movie of watchlistArr) {
     watchlistHtml += `
     <li class="watchlist-movie-container" id="watchlist-movie-container">
       <div class="watchlist-movie" id="watchlist-movie"> 
@@ -440,4 +443,36 @@ function renderMoviesHtmlInWatchlist(watchlistArray) {
       `;
   }
   watchlistContainer.innerHTML = watchlistHtml;
+  // console.log(watchlistArr);
 }
+
+function deleteMoviesFromWatchlist(event) {
+  let newWatchlist = [];
+  if (event.target.dataset.id) {
+    console.log("Movie deleted from your watchlist!");
+    alert("Movie deleted from your watchlist!");
+    for (let i = 0; i < watchlist.length; i++) {
+      if (watchlist[i].id === event.target.dataset.id) {
+        for (let j = 0; j < watchlist.length; j++) {
+          if (i != j) {
+            newWatchlist.push(watchlist[j]);
+          }
+        }
+      }
+    }
+
+    watchlistArray = newWatchlist;
+    watchlist = newWatchlist;
+  }
+  // console.log(watchlistArray);
+  // console.log(watchlist);
+
+  localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCAL STORAGE
+  renderMoviesHtmlInWatchlist(watchlist);
+}
+
+/*
+
+
+
+*/

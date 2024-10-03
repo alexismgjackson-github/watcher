@@ -88,7 +88,7 @@ a {
 }
 
 hr {
-  color: var(--color-bold);
+  color: var(--color-medium);
 }
 
 ::placeholder {
@@ -219,11 +219,6 @@ hr {
   padding: 1.125rem;
 }
 
-.login-btn:hover,
-.signup-btn:hover {
-  opacity: 0.5;
-}
-
 .signup-btn {
   margin: 1rem 0;
 }
@@ -235,6 +230,8 @@ hr {
   color: var(--color-highlight);
 }
 
+.login-btn:hover,
+.signup-btn:hover,
 .view-register-auth-btn:hover,
 .view-login-auth-btn:hover {
   opacity: 0.5;
@@ -294,7 +291,7 @@ hr {
 
 .view-watchlist-btn:hover,
 .logout-btn:hover {
-  opacity: 0.25;
+  opacity: 0.5;
 }
 
 .view-list,
@@ -426,6 +423,10 @@ hr {
   padding-bottom: 2rem;
 }
 
+.modal-heading {
+  color: var(--color-highlight);
+}
+
 .close-modal-btn {
   background-color: inherit;
   border-style: none;
@@ -472,10 +473,10 @@ hr {
 
 .delete-from-watchlist-btn {
   align-items: center;
-  background-color: var(--color-highlight);
+  background-color: #616161;
   border-radius: 0.5rem;
   border-style: none;
-  color: var(--color-extrabold);
+  color: var(--color-extralight);
   display: flex;
   padding: 0.75rem 1.5rem 0.75rem 0.75rem;
 }
