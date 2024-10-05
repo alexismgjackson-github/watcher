@@ -71,11 +71,6 @@ let watchlistContainer = document.getElementById("watchlist-container");
 let watchlistArray = JSON.parse(localStorage.getItem("watchlist")); // LOCAL STORAGE
 const modal = document.getElementById("modal");
 const closeModalBtn = document.getElementById("close-modal-btn");
-/*
-const deleteFromWatchlistBtn = document.getElementById(
-  "delete-from-watchlist-btn"
-);
-*/
 
 // === UI - Event listeners - LOGGED OUT VIEW (LOGIN) === ////
 
@@ -120,6 +115,11 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+if (watchlistArray) {
+  watchlist = watchlistArray;
+  renderMoviesHtmlInWatchlist(watchlistArray); // LOCAL STORAGE
+}
+
 // === Functions - Firebase === ////
 
 function authLogInWithEmail() {
@@ -152,6 +152,7 @@ function authCreateAccWithEmail() {
 function authSignOut() {
   signOut(auth)
     .then(() => {
+      searchResults.innerHTML = "";
       resetCreateAcccountMessages();
     })
     .catch((error) => {
@@ -469,10 +470,8 @@ function deleteMoviesFromWatchlist(event) {
 
   localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCAL STORAGE
   renderMoviesHtmlInWatchlist(watchlist);
+
+  if (watchlist.length === 0) {
+    watchlistContainer.innerHTML = `<li><p class="watchlist-status">No movies found yet</p></li>`;
+  }
 }
-
-/*
-
-
-
-*/
