@@ -387,6 +387,8 @@ function addMovieToWatchlist(event) {
       overview: dataAttribute.overview,
     };
 
+    watchlist.push(dataObject);
+
     console.log("Movie added to watchlist");
     alert("Movie added to watchlist");
 
