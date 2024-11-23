@@ -83,7 +83,7 @@ li {
 }
 
 a {
-  color: var(--color-extrabold); /* delete this later */
+  color: var(--color-extrabold);
   text-decoration: none;
 }
 
@@ -106,6 +106,10 @@ hr {
 
 .error {
   color: red;
+}
+
+:disabled {
+  opacity: 0.4;
 }
 
 /* LOGGED OUT VIEW (LOGIN/REGISTER) */
@@ -488,8 +492,6 @@ hr {
 .delete-from-watchlist-icon {
   margin-right: 0.25rem;
 }
-
-/* MEDIA QUERIES */
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {

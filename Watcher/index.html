@@ -24,6 +24,7 @@
   <body>
     <main>
       <!-- LOGGED OUT VIEW (LOGIN) -->
+
       <section class="logged-out-view-login" id="logged-out-view-login">
         <nav class="login-nav">
           <span class="logo">WATCHER</span>
@@ -42,7 +43,6 @@
               placeholder="Email"
               aria-label="Enter your email"
               aria-required="true"
-              required
             />
             <input
               id="login-password-input"
@@ -52,7 +52,6 @@
               pattern=".{8,}"
               aria-label="Enter your password"
               aria-required="true"
-              required
             />
             <button
               id="login-show-password-btn"
@@ -79,7 +78,9 @@
           </div>
         </div>
       </section>
+
       <!-- LOGGED OUT VIEW (REGISTER)-->
+
       <section class="logged-out-view-register" id="logged-out-view-register">
         <nav class="register-nav">
           <span class="logo">WATCHER</span>
@@ -94,7 +95,6 @@
               placeholder="Email"
               aria-label="Enter a valid email"
               aria-required="true"
-              required
             />
             <section
               class="email-auth-container"
@@ -108,7 +108,6 @@
               pattern=".{6,}"
               aria-label="Enter password - it must contain 6 or more characters"
               aria-required="true"
-              required
             />
             <section
               class="password-auth-container"
@@ -139,7 +138,9 @@
           </div>
         </div>
       </section>
+
       <!-- LOGGED IN VIEW (SEARCH) -->
+
       <section class="logged-in-view" id="logged-in-view">
         <nav class="search-nav" id="search-nav">
           <div class="search-nav-primary">
@@ -199,7 +200,9 @@
         </div>
       </section>
     </main>
+
     <!-- LOGGED IN VIEW (WATCHLIST - MODAL) -->
+
     <div id="modal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
