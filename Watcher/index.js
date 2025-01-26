@@ -1,7 +1,3 @@
-//  http://www.omdbapi.com/?i=tt1630029&apikey=af7906eb
-
-// Here is your key: af7906eb
-
 // === Imports === ////
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
@@ -327,9 +323,9 @@ function fetchMovies(inputValue) {
     .then((data) => {
       const fetchedMovies = data.results;
       const filteredFetchedMovies = fetchedMovies.filter(
-        (movie) => movie.poster_path && movie.overview && movie.overview
+        (movie) => movie.poster_path && movie.overview
       );
-      // console.log(filteredFetchedMovies);
+      console.log(filteredFetchedMovies);
       if (data.total_results > 0) {
         renderFetchedMoviesHtml(filteredFetchedMovies);
         // console.log(filteredFetchedMovies.length);
@@ -346,6 +342,7 @@ function fetchMovies(inputValue) {
 
 function renderFetchedMoviesHtml(searchResultsArr) {
   let html = "";
+
   for (let movie of searchResultsArr) {
     html += `
   <div class="movie" id="movie">
@@ -357,6 +354,7 @@ function renderFetchedMoviesHtml(searchResultsArr) {
     </div>
     <div class="movie-secondary">
       <h2 class="movie-heading">${movie.title}</h2>
+      <p class="overview">${displayGenres(`${movie.genre_ids}`)}</p>
       <p class="overview">${movie.overview}</p>
       <div class="movie-btn-container">
         <button class="add-to-watchlist-btn"
