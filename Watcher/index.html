@@ -20,6 +20,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
   </head>
   <body>
     <main>
@@ -29,6 +33,11 @@
         <nav class="login-nav">
           <span class="logo">WATCHER</span>
         </nav>
+        <div class="decorative-icon-container">
+          <span
+            ><img class="movie-icon" src="assets/movie.png" alt="movie icon" />
+          </span>
+        </div>
         <div class="authentication-container">
           <div class="authentication login">
             <h1 class="login-heading">Log In</h1>
@@ -85,6 +94,11 @@
         <nav class="register-nav">
           <span class="logo">WATCHER</span>
         </nav>
+        <div class="decorative-icon-container">
+          <span
+            ><img class="movie-icon" src="assets/movie.png" alt="movie icon" />
+          </span>
+        </div>
         <div class="authentication-container">
           <div class="authentication register">
             <h1 class="register-heading">Register</h1>
@@ -195,6 +209,9 @@
                 </button>
               </div>
             </form>
+            <div class="search-results-count-container">
+              <span class="search-results-count" id="search-results-count"></span>
+            </div>
           </div>
           <div id="search-results" class="search-results"></div>
         </div>

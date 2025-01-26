@@ -1,3 +1,7 @@
+//  http://www.omdbapi.com/?i=tt1630029&apikey=af7906eb
+
+// Here is your key: af7906eb
+
 // === Imports === ////
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
@@ -59,6 +63,7 @@ const viewWatchlistBtn = document.getElementById("view-watchlist-btn");
 const logoutBtn = document.getElementById("logout-btn");
 const searchBar = document.getElementById("search-bar");
 const searchBtn = document.getElementById("search-btn");
+const searchResultsCount = document.getElementById("search-results-count");
 const searchResults = document.getElementById("search-results");
 
 const baseUrl = "https://api.themoviedb.org/";
@@ -327,11 +332,14 @@ function fetchMovies(inputValue) {
       // console.log(filteredFetchedMovies);
       if (data.total_results > 0) {
         renderFetchedMoviesHtml(filteredFetchedMovies);
+        // console.log(filteredFetchedMovies.length);
+        searchResultsCount.innerHTML = `${filteredFetchedMovies.length} total movies found`;
       } else {
         // console.log("Zero results found");
         searchResults.innerHTML = `
     <p id="search-message" class="search-message">Unable to find what you are looking for. Please try again.</p>
     `;
+        searchResultsCount.innerHTML = `0 total movies found`;
       }
     });
 }

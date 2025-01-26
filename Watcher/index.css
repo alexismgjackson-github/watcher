@@ -76,6 +76,8 @@ button {
 
 button:hover {
   cursor: pointer;
+  opacity: 0.5;
+  transform: scale(0.975);
 }
 
 li {
@@ -108,17 +110,7 @@ hr {
   color: red;
 }
 
-:disabled {
-  opacity: 0.4;
-}
-
 /* LOGGED OUT VIEW (LOGIN/REGISTER) */
-
-.logged-out-view-login,
-.logged-out-view-register {
-  display: grid;
-  gap: 8rem;
-}
 
 #logged-out-view-login,
 #logged-out-view-register {
@@ -140,6 +132,17 @@ hr {
 
 .logo:hover {
   cursor: default;
+}
+
+.decorative-icon-container {
+  margin: auto;
+}
+
+.movie-icon {
+  animation: bounce;
+  animation-duration: 2s;
+  margin: 6rem 0rem 2rem 0rem;
+  width: 10rem;
 }
 
 .authentication-container {
@@ -203,11 +206,7 @@ hr {
   display: flex;
   font-size: 1.4rem;
   font-style: italic;
-  opacity: 0.5;
-}
-
-.show-password-btn:hover {
-  opacity: 0.75;
+  opacity: 0.375;
 }
 
 .show-password-icon {
@@ -232,13 +231,6 @@ hr {
   border-style: none;
   background-color: inherit;
   color: var(--color-highlight);
-}
-
-.login-btn:hover,
-.signup-btn:hover,
-.view-register-auth-btn:hover,
-.view-login-auth-btn:hover {
-  opacity: 0.5;
 }
 
 /* LOGGED IN VIEW (SEARCH) */
@@ -293,11 +285,6 @@ hr {
   padding: 0.1375rem;
 }
 
-.view-watchlist-btn:hover,
-.logout-btn:hover {
-  opacity: 0.5;
-}
-
 .view-list,
 .logout {
   color: var(--color-extrabold);
@@ -348,9 +335,19 @@ hr {
   opacity: 0.5;
 }
 
+.search-results-count-container {
+  margin-top: 4rem;
+}
+
+.search-results-count {
+  color: var(--color-light);
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
 .search-results {
   display: grid;
-  gap: 3rem;
+  gap: 6rem;
 }
 
 .search-message {
@@ -485,10 +482,6 @@ hr {
   padding: 0.75rem 1.5rem 0.75rem 0.75rem;
 }
 
-.delete-from-watchlist-btn:hover {
-  opacity: 0.5;
-}
-
 .delete-from-watchlist-icon {
   margin-right: 0.25rem;
 }
@@ -512,7 +505,7 @@ hr {
 
   .modal {
     height: 90%;
-    width: 75%;
+    width: 85%;
   }
 
   .modal-body {
