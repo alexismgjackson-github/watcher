@@ -325,7 +325,7 @@ function fetchMovies(inputValue) {
       const filteredFetchedMovies = fetchedMovies.filter(
         (movie) => movie.poster_path && movie.overview
       );
-      console.log(filteredFetchedMovies);
+      // console.log(filteredFetchedMovies);
       if (data.total_results > 0) {
         renderFetchedMoviesHtml(filteredFetchedMovies);
         // console.log(filteredFetchedMovies.length);
@@ -395,14 +395,14 @@ function addMovieToWatchlist(event) {
 
     watchlist.push(dataObject);
 
-    console.log("Movie added to watchlist");
+    // console.log("Movie added to watchlist");
     alert("Movie added to watchlist");
 
     localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCAL STORAGE
     renderMoviesHtmlInWatchlist(watchlist);
 
-    console.log(watchlistArray); // null
-    console.log(watchlist);
+    // console.log(watchlistArray); 
+    // console.log(watchlist);
   }
 }
 
@@ -453,7 +453,7 @@ function renderMoviesHtmlInWatchlist(watchlistArr) {
       `;
   }
   watchlistContainer.innerHTML = watchlistHtml;
-  console.log(watchlistArr); //
+  // console.log(watchlistArr); 
 }
 
 function deleteMovieFromWatchlist(event) {
@@ -470,7 +470,7 @@ function deleteMovieFromWatchlist(event) {
       }
     }
 
-    console.log("Movie removed from watchlist");
+   // console.log("Movie removed from watchlist");
     alert("Movie removed from watchlist");
 
     watchlistArray = newWatchlist;
@@ -484,6 +484,6 @@ function deleteMovieFromWatchlist(event) {
     watchlistContainer.innerHTML = `<li><p class="watchlist-status">No movies found yet</p></li>`;
   }
 
-  console.log(watchlistArray);
-  console.log(watchlist); //
+  // console.log(watchlistArray);
+  // console.log(watchlist); 
 }
