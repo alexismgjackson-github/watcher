@@ -354,7 +354,6 @@ function renderFetchedMoviesHtml(searchResultsArr) {
     </div>
     <div class="movie-secondary">
       <h2 class="movie-heading">${movie.title}</h2>
-      <p class="overview">${movie.genre_ids}</p>
       <p class="overview">${movie.overview}</p>
       <div class="movie-btn-container">
         <button class="add-to-watchlist-btn"
@@ -401,7 +400,7 @@ function addMovieToWatchlist(event) {
     localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCAL STORAGE
     renderMoviesHtmlInWatchlist(watchlist);
 
-    // console.log(watchlistArray); 
+    // console.log(watchlistArray);
     // console.log(watchlist);
   }
 }
@@ -453,7 +452,7 @@ function renderMoviesHtmlInWatchlist(watchlistArr) {
       `;
   }
   watchlistContainer.innerHTML = watchlistHtml;
-  // console.log(watchlistArr); 
+  // console.log(watchlistArr);
 }
 
 function deleteMovieFromWatchlist(event) {
@@ -470,7 +469,7 @@ function deleteMovieFromWatchlist(event) {
       }
     }
 
-   // console.log("Movie removed from watchlist");
+    // console.log("Movie removed from watchlist");
     alert("Movie removed from watchlist");
 
     watchlistArray = newWatchlist;
@@ -485,5 +484,5 @@ function deleteMovieFromWatchlist(event) {
   }
 
   // console.log(watchlistArray);
-  // console.log(watchlist); 
+  // console.log(watchlist);
 }
