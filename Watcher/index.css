@@ -186,14 +186,14 @@ hr {
 
 .login-email-input,
 .register-email-input {
-  background-image: url("assets/mail.svg");
+  background-image: url("public/assets/icons/mail.svg");
   background-position: 3.5% 50%;
   background-repeat: no-repeat;
 }
 
 .login-password-input,
 .register-password-input {
-  background-image: url("assets/lock.svg");
+  background-image: url("public/assets/icons/lock.svg");
   background-position: 3.5% 50%;
   background-repeat: no-repeat;
 }
@@ -313,7 +313,7 @@ hr {
 }
 
 .search-bar {
-  background-image: url("assets/search.svg");
+  background-image: url("public/assets/icons/search.svg");
   background-position: 2.125% 50%;
   background-repeat: no-repeat;
 }
