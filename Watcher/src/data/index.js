@@ -1,15 +1,25 @@
-// === Imports === ////
+// ========  Imports  ============================================================= ////
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
-// === Firebase setup === ////
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  deleteDoc,
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+// ======== Firebase setup  ============================================================= ////
 
 const firebaseConfig = {
   apiKey: "AIzaSyD3oXhhIntMetNecqI5f5NwOIz5BKD7dOw",
@@ -20,10 +30,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig); // initialize firebase
 const auth = getAuth(app); // get a reference to the authentication service
+const db = getFirestore(app); // initialize cloud firestore and get a reference to the service
 
 // console.log(firebaseConfig.databaseURL);
+// console.log(getFirestore(app));
 
-// === UI - Elements - LOGGED OUT VIEW (LOGIN) === ////
+// ======== UI - Elements - LOGGED OUT VIEW (LOGIN)  ============================================================= ////
 
 const viewLoggedOutLogin = document.getElementById("logged-out-view-login");
 const userAuthContainer = document.getElementById("user-auth-container");
@@ -33,7 +45,7 @@ const loginShowPasswordBtn = document.getElementById("login-show-password-btn");
 const loginBtn = document.getElementById("login-btn");
 const viewLoginAuthBtn = document.getElementById("view-login-auth-btn");
 
-// === UI - Elements - LOGGED OUT VIEW (REGISTER) === ////
+// ======== UI - Elements - LOGGED OUT VIEW (REGISTER)  ============================================================= ////
 
 const viewLoggedOutRegister = document.getElementById(
   "logged-out-view-register"
@@ -52,7 +64,7 @@ const registerShowPasswordBtn = document.getElementById(
 const signupBtn = document.getElementById("signup-btn");
 const viewRegisterAuthBtn = document.getElementById("view-register-auth-btn");
 
-// === UI - Elements - LOGGED IN VIEW (SEARCH) === ////
+// ======== UI - Elements - LOGGED IN VIEW (SEARCH)  ============================================================= ////
 
 const viewLoggedIn = document.getElementById("logged-in-view");
 const viewWatchlistBtn = document.getElementById("view-watchlist-btn");
@@ -64,16 +76,14 @@ const searchResults = document.getElementById("search-results");
 
 const baseUrl = "https://api.themoviedb.org/";
 const apiKey = "c073b993bfd587ff8250925f5296110a";
-let watchlist = [];
 
-// === UI - Elements - LOGGED IN VIEW (WATCHLIST - MODAL) === ////
+// ======== UI - Elements - LOGGED IN VIEW (WATCHLIST - MODAL)  ============================================================= ////
 
 let watchlistContainer = document.getElementById("watchlist-container");
-let watchlistArray = JSON.parse(localStorage.getItem("watchlist")); // LOCALSTORAGE
 const modal = document.getElementById("modal");
 const closeModalBtn = document.getElementById("close-modal-btn");
 
-// === UI - Event listeners - LOGGED OUT VIEW (LOGIN) === ////
+// ======== UI - Event listeners - LOGGED OUT VIEW (LOGIN)  ============================================================= ////
 
 loginBtn.addEventListener("click", authLogInWithEmail);
 
@@ -81,7 +91,7 @@ loginShowPasswordBtn.addEventListener("click", showLoginPassword);
 
 viewRegisterAuthBtn.addEventListener("click", showRegistration);
 
-// === UI - Event listeners - LOGGED OUT VIEW (REGISTER) === ////
+// ======== UI - Event listeners - LOGGED OUT VIEW (REGISTER)  ============================================================= ////
 
 signupBtn.addEventListener("click", authCreateAccWithEmail);
 
@@ -89,7 +99,7 @@ registerShowPasswordBtn.addEventListener("click", showRegisterPassword);
 
 viewLoginAuthBtn.addEventListener("click", showLogin);
 
-// === UI - Event listeners - LOGGED IN VIEW (SEARCH) === ////
+// ======== UI - Event listeners - LOGGED IN VIEW (SEARCH)  ============================================================= ////
 
 logoutBtn.addEventListener("click", authSignOut);
 
@@ -99,29 +109,24 @@ searchBtn.addEventListener("click", handleClickSearch);
 
 searchResults.addEventListener("dblclick", addMovieToWatchlist);
 
-// === UI - Event listeners - LOGGED IN VIEW (WATCHLIST - MODAL) === ////
+// ======== UI - Event listeners - LOGGED IN VIEW (WATCHLIST - MODAL)  ============================================================= ////
 
 watchlistContainer.addEventListener("dblclick", deleteMovieFromWatchlist);
 
 closeModalBtn.addEventListener("click", closeWatchlistModal);
 
-// === Main code === ////
+// ======== Main code ============================================================= ////
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     showCreateAccountSuccess();
-    setTimeout(showLoggedInView, 1500);
+    setTimeout(showLoggedInView, 1000);
   } else {
     setTimeout(showLoggedOutView, 500);
   }
 });
 
-if (watchlistArray) {
-  watchlist = watchlistArray;
-  renderMoviesHtmlInWatchlist(watchlistArray); // LOCALSTORAGE
-}
-
-// === Functions - Firebase === ////
+// ======== Functions - Firebase  ============================================================= ////
 
 function authLogInWithEmail() {
   const email = loginEmailInput.value;
@@ -131,6 +136,7 @@ function authLogInWithEmail() {
     .then((userCredential) => {
       resetUserMessage();
       clearLoginAuthFields();
+      const user = auth.currentUser;
     })
     .catch((error) => {
       console.error(error.message);
@@ -161,7 +167,7 @@ function authSignOut() {
     });
 }
 
-// === Functions - UI === ////
+// ======== Functions - UI  ============================================================= ////
 
 function showViewInFlex(view) {
   view.style.display = "flex";
@@ -179,7 +185,7 @@ function clearInputField(field) {
   field.value = "";
 }
 
-// === Functions - UI - LOGGED OUT VIEW (LOGIN) === ////
+// ======== Functions - UI - LOGGED OUT VIEW (LOGIN) ============================================================= ////
 
 function showLoggedOutView() {
   hideView(viewLoggedIn);
@@ -201,7 +207,7 @@ function showUserError() {
   userAuthContainer.innerHTML = `
   <div class="user-error" id="user-error">
     <img
-    src="../public/assets/icons/assets/error.svg"
+    src="/public/assets/icons/error.svg"
     alt="Red circle with exclamation point inside"
     />
     <p class="user-auth-message error">
@@ -226,7 +232,7 @@ function showLoginPassword() {
   }
 }
 
-// === Functions - UI - LOGGED OUT VIEW (REGISTER) === ////
+// ======== Functions - UI - LOGGED OUT VIEW (REGISTER)  ============================================================= ////
 
 function showRegistration() {
   resetUserMessage();
@@ -244,7 +250,7 @@ function showCreateAccountSuccess() {
   emailAuthContainer.innerHTML = `
   <div class="email-success" id="email-success">
     <img
-    src="../public/assets/icons/success.svg"
+    src="/public/assets/icons/success.svg"
     alt="Green circle with checkmark inside"
     />
     <p class="email-auth-message success">
@@ -255,7 +261,7 @@ function showCreateAccountSuccess() {
   passwordAuthContainer.innerHTML = `
   <div class="password-success" id="password-success">
     <img
-    src="../public/assets/icons/success.svg"
+    src="/public/assets/icons/success.svg"
     alt="Green circle with checkmark inside"
     />
     <p class="password-auth-message success">
@@ -268,7 +274,7 @@ function showCreateAccountError() {
   emailAuthContainer.innerHTML = `
   <div class="email-error" id="email-error">
     <img
-    src="../public/assets/icons/error.svg"
+    src="/public/assets/icons/error.svg"
     alt="Red circle with exclamation point inside"
     />
     <p class="email-auth-message error">
@@ -279,7 +285,7 @@ function showCreateAccountError() {
   passwordAuthContainer.innerHTML = `
   <div class="password-error" id="password-error">
     <img
-    src="../public/assets/icons/error.svg"
+    src="/public/assets/icons/error.svg"
     alt="Red circle with exclamation point inside"
     />
     <p class="password-auth-message error">
@@ -303,12 +309,13 @@ function showRegisterPassword() {
   }
 }
 
-// === Functions - UI - LOGGED IN VIEW (SEARCH) === ////
+// ======== Functions - UI - LOGGED IN VIEW (SEARCH)  ============================================================= ////
 
 function showLoggedInView() {
   hideView(viewLoggedOutLogin);
   hideView(viewLoggedOutRegister);
   showViewInGrid(viewLoggedIn);
+  renderMoviesHtmlInWatchlist(); // temporary data persistance
 }
 
 function handleClickSearch(event) {
@@ -329,13 +336,13 @@ function fetchMovies(inputValue) {
       if (data.total_results > 0) {
         renderFetchedMoviesHtml(filteredFetchedMovies);
         // console.log(filteredFetchedMovies.length);
-        searchResultsCount.innerHTML = `${filteredFetchedMovies.length} total movies found`;
+        searchResultsCount.innerHTML = `${filteredFetchedMovies.length} total movies found (Double click to add movies to your watchlist!)`;
       } else {
         // console.log("Zero results found");
         searchResults.innerHTML = `
     <p id="search-message" class="search-message">Unable to find what you are looking for. Please try again.</p>
     `;
-        searchResultsCount.innerHTML = `0 total movies found`;
+        searchResultsCount.innerHTML = ``;
       }
     });
 }
@@ -349,12 +356,13 @@ function renderFetchedMoviesHtml(searchResultsArr) {
     <div class="movie-primary">
       <img 
         class="movie-poster"
-        src="https://image.tmdb.org/t/p/original/${movie.poster_path}" 
-        alt="${movie.title} poster">
+        src="https://image.tmdb.org/t/p/original${movie.poster_path}" 
+        alt="${movie.title} poster"
+        >
     </div>
     <div class="movie-secondary">
       <h2 class="movie-heading">${movie.title}</h2>
-      <p class="overview">${movie.overview}</p>
+      <p class="movie-overview">OVERVIEW: ${movie.overview}</p>
       <div class="movie-btn-container">
         <button class="add-to-watchlist-btn"
           id="${movie.id}"
@@ -365,11 +373,12 @@ function renderFetchedMoviesHtml(searchResultsArr) {
           >
             <img
                 class="add-to-watchlist-icon"
-                src="../public/assets/icons/add.svg"
+                src="/public/assets/icons/add.svg"
                 alt="Add To Watchlist"
             >
             Watchlist
         </button>
+        
       </div>
     </div>
   </div>
@@ -379,33 +388,35 @@ function renderFetchedMoviesHtml(searchResultsArr) {
 
   searchResults.innerHTML = html;
   searchBar.value = "";
-  // console.log(array);
+  // console.log(movie);
 }
 
-function addMovieToWatchlist(event) {
+// set a new movie into "movies" collection on double click
+
+async function addMovieToWatchlist(event) {
+  const user = auth.currentUser;
+
   if (event.target.dataset.id) {
     let dataAttribute = event.target.dataset;
-    const dataObject = {
-      id: dataAttribute.id,
-      poster: dataAttribute.poster,
-      title: dataAttribute.title,
-      overview: dataAttribute.overview,
-    };
-
-    watchlist.push(dataObject);
-
-    // console.log("Movie added to watchlist");
-    alert("Movie added to watchlist");
-
-    localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCAL STORAGE
-    renderMoviesHtmlInWatchlist(watchlist);
-
-    // console.log(watchlistArray);
-    // console.log(watchlist);
+    try {
+      await setDoc(doc(db, "movies", dataAttribute.id), {
+        poster: dataAttribute.poster,
+        title: dataAttribute.title,
+        overview: dataAttribute.overview,
+        id: parseInt(dataAttribute.id),
+        uid: user.uid,
+      });
+      console.log("Movie written with ID: ", parseInt(dataAttribute.id));
+    } catch (error) {
+      console.error("Error adding movie: ", error.message);
+    }
   }
+
+  alert("Movie added to your watchlist");
+  renderMoviesHtmlInWatchlist();
 }
 
-// === Functions - UI - LOGGED IN VIEW (WATCHLIST) === ////
+// ======== Functions - UI - LOGGED IN VIEW (WATCHLIST)  ============================================================= ////
 
 function showWatchlistModal() {
   showViewInFlex(modal);
@@ -417,29 +428,39 @@ function closeWatchlistModal() {
   document.body.style.overflow = "scroll";
 }
 
-function renderMoviesHtmlInWatchlist(watchlistArr) {
+async function renderMoviesHtmlInWatchlist() {
   let watchlistHtml = "";
 
-  for (let movie of watchlistArr) {
+  const querySnapshot = await getDocs(collection(db, "movies"));
+
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data()); // wholedoc
+
     watchlistHtml += `
     <li class="watchlist-movie-container" id="watchlist-movie-container">
       <div class="watchlist-movie" id="watchlist-movie"> 
         <div class="watchlist-movie-primary">
           <img 
           class="watchlist-movie-poster"
-          src="https://image.tmdb.org/t/p/original/${movie.poster}"
-          alt="${movie.title} poster">
+          src="https://image.tmdb.org/t/p/original${doc.data().poster}"
+          alt="${doc.data().title} poster"
+          loading="lazy"
+          >
         </div>
         <div class="watchlist-movie-secondary">
-          <h2 class="watchlist-movie-heading">${movie.title}</h2>
-          <p class="watchlist-overview">${movie.overview}</p>
+          <h2 class="watchlist-movie-heading">${doc.data().title}</h2>
+          <p class="watchlist-overview">OVERVIEW: ${doc.data().overview}</p>
           <div class="watchlist-btn-container">
             <button class="delete-from-watchlist-btn"
-              id="${movie.id}" 
-              data-id="${movie.id}">
+              id="${doc.data().uid}" 
+              data-id="${doc.data().id}"
+              data-poster="${doc.data().poster_path}" 
+              data-title="${doc.data().title}"
+              data-overview="${doc.data().overview}">
               <img
                 class="delete-from-watchlist-icon"
-                src="../public/assets/icons/delete.svg"
+                src="/public/assets/icons/delete.svg"
                 alt="Delete From Watchlist"
               />
               Watchlist
@@ -450,39 +471,17 @@ function renderMoviesHtmlInWatchlist(watchlistArr) {
     </li>
   <hr> 
       `;
-  }
-  watchlistContainer.innerHTML = watchlistHtml;
-  // console.log(watchlistArr);
+
+    watchlistContainer.innerHTML = watchlistHtml;
+  });
 }
 
-function deleteMovieFromWatchlist(event) {
-  let newWatchlist = [];
+// delete a existing movie from "movies" collection on double click
 
-  if (event.target.dataset.id) {
-    for (let i = 0; i < watchlist.length; i++) {
-      if (watchlist[i].id === event.target.dataset.id) {
-        for (let j = 0; j < watchlist.length; j++) {
-          if (i != j) {
-            newWatchlist.push(watchlist[j]);
-          }
-        }
-      }
-    }
+async function deleteMovieFromWatchlist(event) {
+  let dataAttribute = event.target.dataset;
+  await deleteDoc(doc(db, "movies", dataAttribute.id));
 
-    // console.log("Movie removed from watchlist");
-    alert("Movie removed from watchlist");
-
-    watchlistArray = newWatchlist;
-    watchlist = newWatchlist;
-
-    localStorage.setItem("watchlist", JSON.stringify(watchlist)); // LOCALSTORAGE
-    renderMoviesHtmlInWatchlist(watchlist);
-  }
-
-  if (watchlist.length === 0) {
-    watchlistContainer.innerHTML = `<li><p class="watchlist-status">No movies found yet</p></li>`;
-  }
-
-  // console.log(watchlistArray);
-  // console.log(watchlist);
+  alert("Movie removed from your watchlist");
+  renderMoviesHtmlInWatchlist();
 }

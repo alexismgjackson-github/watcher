@@ -375,6 +375,11 @@ hr {
   gap: 2.5rem;
 }
 
+.movie-overview,
+.watchlist-overview {
+  line-height: 2.8rem;
+}
+
 .movie-btn-container {
   margin: auto;
 }
@@ -387,6 +392,7 @@ hr {
   color: var(--color-extrabold);
   display: flex;
   padding: 0.75rem 1.5rem 0.75rem 0.75rem;
+  position: relative;
 }
 
 .add-to-watchlist-btn:hover {

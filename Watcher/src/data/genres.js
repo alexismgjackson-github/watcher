@@ -1,4 +1,8 @@
 /*
+
+WILL BE REVISITING IN THE NEAR FUTURE TO DISPLAY THE GENRES OF EACH MOVIE!!!!!!!!!!
+
+
 export const genres = {
   genres: [
     { id: 28, name: "Action" },
@@ -22,4 +26,5 @@ export const genres = {
     { id: 37, name: "Western" },
   ],
 };
+
 */
