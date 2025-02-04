@@ -1,30 +1,48 @@
-/*
+function getMovieGenreName(array) {
+  return array.map((id) => {
+    switch (id) {
+      case 28:
+        return "Action";
+      case 12:
+        return "Adventure";
+      case 16:
+        return "Animation";
+      case 35:
+        return "Comedy";
+      case 80:
+        return "Crime";
+      case 99:
+        return "Documentary";
+      case 18:
+        return "Drama";
+      case 10751:
+        return "Family";
+      case 14:
+        return "Fantasy";
+      case 36:
+        return "History";
+      case 27:
+        return "Horror";
+      case 10402:
+        return "Music";
+      case 9648:
+        return "Mystery";
+      case 10749:
+        return "Romance";
+      case 878:
+        return "Science Fiction";
+      case 10770:
+        return "TV Movie";
+      case 53:
+        return "Thriller";
+      case 10752:
+        return "War";
+      case 37:
+        return "Western";
+      default:
+        return "Unknown Genre";
+    }
+  });
+}
 
-WILL BE REVISITING IN THE NEAR FUTURE TO DISPLAY THE GENRES OF EACH MOVIE!!!!!!!!!!
-
-
-export const genres = {
-  genres: [
-    { id: 28, name: "Action" },
-    { id: 12, name: "Adventure" },
-    { id: 16, name: "Animation" },
-    { id: 35, name: "Comedy" },
-    { id: 80, name: "Crime" },
-    { id: 99, name: "Documentary" },
-    { id: 18, name: "Drama" },
-    { id: 10751, name: "Family" },
-    { id: 14, name: "Fantasy" },
-    { id: 36, name: "History" },
-    { id: 27, name: "Horror" },
-    { id: 10402, name: "Music" },
-    { id: 9648, name: "Mystery" },
-    { id: 10749, name: "Romance" },
-    { id: 878, name: "Science Fiction" },
-    { id: 10770, name: "TV Movie" },
-    { id: 53, name: "Thriller" },
-    { id: 10752, name: "War" },
-    { id: 37, name: "Western" },
-  ],
-};
-
-*/
+export { getMovieGenreName };

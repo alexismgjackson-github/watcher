@@ -1,5 +1,6 @@
 // ========  Imports  ============================================================= ////
 
+import { getMovieGenreName } from "./genres.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 
 import {
@@ -383,6 +384,10 @@ function renderFetchedMoviesHtml(searchResultsArr) {
     </div>
     <div class="movie-secondary">
       <h2 class="movie-heading">${movie.title}</h2>
+      <p class="movie-genres">GENRES : ${getMovieGenreName(
+        movie.genre_ids
+      ).join(", ")}
+      </p>
       <p class="movie-overview">OVERVIEW : ${movie.overview}</p>
       <div class="movie-btn-container">
         <button class="add-to-watchlist-btn"
@@ -406,6 +411,7 @@ function renderFetchedMoviesHtml(searchResultsArr) {
       `;
   }
 
+  // getMovieGenreName(movie.genre_ids);
   searchResults.innerHTML = html;
   searchBar.value = "";
   // console.log(movie);
@@ -420,13 +426,14 @@ async function addMovieToWatchlist(event) {
       const docRef = await setDoc(doc(db, "movies", dataAttribute.id), {
         poster: dataAttribute.poster,
         title: dataAttribute.title,
+        genres: dataAttribute.genre_ids,
         overview: dataAttribute.overview,
         id: dataAttribute.id,
         uid: user.uid,
       });
       console.log(`Movie written with ID: ${dataAttribute.id} `);
       alert("Movie added to watchlist");
-      location.reload();
+      location.reload(); // temporary solution to render watchlist changes
     } catch (error) {
       console.error("Error adding movie: ", error.message);
     }
@@ -459,6 +466,9 @@ function renderMoviesHtmlInWatchlist(watchlistContainer, movieData) {
         </div>
         <div class="watchlist-movie-secondary">
           <h2 class="watchlist-movie-heading">${movieData.title}</h2>
+          <p class="watchlist-genres">GENRES : ${getMovieGenreName(
+            movie.genre_ids
+          ).join(", ")}</p>
           <p class="watchlist-overview">OVERVIEW: ${movieData.overview}</p>
           <div class="watchlist-btn-container">
             <button class="delete-from-watchlist-btn"
@@ -497,7 +507,7 @@ async function deleteMovieFromWatchlist(event) {
       });
       console.log(`Delete movie written with ID: ${dataAttribute.id} `);
       alert("Movie deleted from watchlist");
-      location.reload();
+      location.reload(); // temporary solution to render watchlist changes
     } catch (error) {
       console.error("Error deleting movie: ", error.message);
     }

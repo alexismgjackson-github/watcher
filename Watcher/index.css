@@ -370,7 +370,7 @@ hr {
 }
 
 .movie-poster {
-  width: 45%;
+  width: 60%;
 }
 
 .movie-secondary {
@@ -378,6 +378,8 @@ hr {
   gap: 2.5rem;
 }
 
+.movie-genres,
+.watchlist-genres,
 .movie-overview,
 .watchlist-overview {
   line-height: 2.8rem;
