@@ -1,5 +1,5 @@
 function getMovieGenreName(array) {
-  return array.map((id) => {
+  return array.map(function (id) {
     switch (id) {
       case 28:
         return "Action";
