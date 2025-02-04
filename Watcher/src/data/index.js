@@ -501,6 +501,7 @@ async function deleteMovieFromWatchlist(event) {
       const docRef = await deleteDoc(doc(db, "movies", dataAttribute.id), {
         poster: dataAttribute.poster,
         title: dataAttribute.title,
+        genres: dataAttribute.genre_ids,
         overview: dataAttribute.overview,
         id: dataAttribute.id,
         uid: user.uid,
