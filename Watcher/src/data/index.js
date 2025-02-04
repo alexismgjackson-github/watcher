@@ -118,7 +118,7 @@ watchlistContainer.addEventListener("dblclick", deleteMovieFromWatchlist);
 
 closeModalBtn.addEventListener("click", closeWatchlistModal);
 
-// ======== Main code ============================================================= ////
+// ======== Main ============================================================= ////
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -352,7 +352,7 @@ function fetchMovies(inputValue) {
     .then((data) => {
       const fetchedMovies = data.results;
       const filteredFetchedMovies = fetchedMovies.filter(
-        (movie) => movie.poster_path && movie.overview
+        (movie) => movie.poster_path && movie.overview && movie.genre_ids
       );
       // console.log(filteredFetchedMovies);
       if (data.total_results > 0) {
@@ -464,7 +464,7 @@ function renderMoviesHtmlInWatchlist(watchlistContainer, movieData) {
         </div>
         <div class="watchlist-movie-secondary">
           <h2 class="watchlist-movie-heading">${movieData.title}</h2>
-          <p class="watchlist-overview">OVERVIEW: ${movieData.overview}</p>
+          <p class="watchlist-overview">OVERVIEW : ${movieData.overview}</p>
           <div class="watchlist-btn-container">
             <button class="delete-from-watchlist-btn"
               data-uid="${movieData.uid}" 

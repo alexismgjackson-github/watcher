@@ -54,7 +54,7 @@ label,
 select,
 textarea,
 ul {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 
 p {
@@ -370,7 +370,7 @@ hr {
 }
 
 .movie-poster {
-  width: 60%;
+  width: 70%;
 }
 
 .movie-secondary {
