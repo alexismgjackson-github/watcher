@@ -17,6 +17,8 @@ import {
   setDoc,
   getDocs,
   deleteDoc,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
 // ======== Firebase setup  ============================================================= ////
@@ -120,9 +122,28 @@ closeModalBtn.addEventListener("click", closeWatchlistModal);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     showCreateAccountSuccess();
-    setTimeout(showLoggedInView, 1000);
+
+    const uid = user.uid;
+    const q = query(collection(db, "movies"), where("uid", "==", uid));
+
+    setTimeout(showLoggedInView, 2000);
+
+    try {
+      getDocs(q).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(
+            `User ${user.uid} currently has "${doc.data().title}" in watchlist`
+          );
+          renderMoviesHtmlInWatchlist(watchlistContainer, doc.data());
+        });
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+    console.log(`User ${user.uid} is logged in!`);
   } else {
     setTimeout(showLoggedOutView, 500);
+    console.log("No user is currently signed in");
   }
 });
 
@@ -160,6 +181,7 @@ function authSignOut() {
   signOut(auth)
     .then(() => {
       searchResults.innerHTML = "";
+      location.reload();
       resetCreateAcccountMessages();
     })
     .catch((error) => {
@@ -278,7 +300,7 @@ function showCreateAccountError() {
     alt="Red circle with exclamation point inside"
     />
     <p class="email-auth-message error">
-    Please enter a valid email address.
+    Please enter a fake email address.
     </p>
   </div>`;
 
@@ -315,7 +337,6 @@ function showLoggedInView() {
   hideView(viewLoggedOutLogin);
   hideView(viewLoggedOutRegister);
   showViewInGrid(viewLoggedIn);
-  renderMoviesHtmlInWatchlist(); // temporary data persistance
 }
 
 function handleClickSearch(event) {
@@ -336,11 +357,11 @@ function fetchMovies(inputValue) {
       if (data.total_results > 0) {
         renderFetchedMoviesHtml(filteredFetchedMovies);
         // console.log(filteredFetchedMovies.length);
-        searchResultsCount.innerHTML = `${filteredFetchedMovies.length} total movies found (Double click to add movies to your watchlist!)`;
+        searchResultsCount.innerHTML = `${filteredFetchedMovies.length} total movies found (Double click to add movies to watchlist!)`;
       } else {
         // console.log("Zero results found");
         searchResults.innerHTML = `
-    <p id="search-message" class="search-message">Unable to find what you are looking for. Please try again.</p>
+    <p id="search-message" class="search-message">Unable to find what you are looking for. Please try again!</p>
     `;
         searchResultsCount.innerHTML = ``;
       }
@@ -362,11 +383,10 @@ function renderFetchedMoviesHtml(searchResultsArr) {
     </div>
     <div class="movie-secondary">
       <h2 class="movie-heading">${movie.title}</h2>
-      <p class="movie-overview">OVERVIEW: ${movie.overview}</p>
+      <p class="movie-overview">OVERVIEW : ${movie.overview}</p>
       <div class="movie-btn-container">
         <button class="add-to-watchlist-btn"
-          id="${movie.id}"
-          data-id="${movie.id}" 
+          data-id="${movie.id}"  
           data-poster="${movie.poster_path}" 
           data-title="${movie.title}"
           data-overview="${movie.overview}"
@@ -391,29 +411,26 @@ function renderFetchedMoviesHtml(searchResultsArr) {
   // console.log(movie);
 }
 
-// set a new movie into "movies" collection on double click
-
 async function addMovieToWatchlist(event) {
-  const user = auth.currentUser;
-
   if (event.target.dataset.id) {
     let dataAttribute = event.target.dataset;
+    const user = auth.currentUser;
+
     try {
-      await setDoc(doc(db, "movies", dataAttribute.id), {
+      const docRef = await setDoc(doc(db, "movies", dataAttribute.id), {
         poster: dataAttribute.poster,
         title: dataAttribute.title,
         overview: dataAttribute.overview,
-        id: parseInt(dataAttribute.id),
+        id: dataAttribute.id,
         uid: user.uid,
       });
-      console.log("Movie written with ID: ", parseInt(dataAttribute.id));
+      console.log(`Movie written with ID: ${dataAttribute.id} `);
+      alert("Movie added to watchlist");
+      location.reload();
     } catch (error) {
       console.error("Error adding movie: ", error.message);
     }
   }
-
-  alert("Movie added to your watchlist");
-  renderMoviesHtmlInWatchlist();
 }
 
 // ======== Functions - UI - LOGGED IN VIEW (WATCHLIST)  ============================================================= ////
@@ -428,36 +445,28 @@ function closeWatchlistModal() {
   document.body.style.overflow = "scroll";
 }
 
-async function renderMoviesHtmlInWatchlist() {
-  let watchlistHtml = "";
-
-  const querySnapshot = await getDocs(collection(db, "movies"));
-
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data()); // wholedoc
-
-    watchlistHtml += `
-    <li class="watchlist-movie-container" id="watchlist-movie-container">
+function renderMoviesHtmlInWatchlist(watchlistContainer, movieData) {
+  watchlistContainer.innerHTML += `
+  <li class="watchlist-movie-container" id="watchlist-movie-container">
       <div class="watchlist-movie" id="watchlist-movie"> 
         <div class="watchlist-movie-primary">
           <img 
           class="watchlist-movie-poster"
-          src="https://image.tmdb.org/t/p/original${doc.data().poster}"
-          alt="${doc.data().title} poster"
+          src="https://image.tmdb.org/t/p/original${movieData.poster}"
+          alt="${movieData.title} poster"
           loading="lazy"
           >
         </div>
         <div class="watchlist-movie-secondary">
-          <h2 class="watchlist-movie-heading">${doc.data().title}</h2>
-          <p class="watchlist-overview">OVERVIEW: ${doc.data().overview}</p>
+          <h2 class="watchlist-movie-heading">${movieData.title}</h2>
+          <p class="watchlist-overview">OVERVIEW: ${movieData.overview}</p>
           <div class="watchlist-btn-container">
             <button class="delete-from-watchlist-btn"
-              id="${doc.data().uid}" 
-              data-id="${doc.data().id}"
-              data-poster="${doc.data().poster_path}" 
-              data-title="${doc.data().title}"
-              data-overview="${doc.data().overview}">
+              data-uid="${movieData.uid}" 
+              data-id="${movieData.id}"
+              data-poster="${movieData.poster}" 
+              data-title="${movieData.title}"
+              data-overview="${movieData.overview}">
               <img
                 class="delete-from-watchlist-icon"
                 src="/public/assets/icons/delete.svg"
@@ -471,17 +480,26 @@ async function renderMoviesHtmlInWatchlist() {
     </li>
   <hr> 
       `;
-
-    watchlistContainer.innerHTML = watchlistHtml;
-  });
 }
 
-// delete a existing movie from "movies" collection on double click
-
 async function deleteMovieFromWatchlist(event) {
-  let dataAttribute = event.target.dataset;
-  await deleteDoc(doc(db, "movies", dataAttribute.id));
+  if (event.target.dataset.id) {
+    let dataAttribute = event.target.dataset;
+    const user = auth.currentUser;
 
-  alert("Movie removed from your watchlist");
-  renderMoviesHtmlInWatchlist();
+    try {
+      const docRef = await deleteDoc(doc(db, "movies", dataAttribute.id), {
+        poster: dataAttribute.poster,
+        title: dataAttribute.title,
+        overview: dataAttribute.overview,
+        id: dataAttribute.id,
+        uid: user.uid,
+      });
+      console.log(`Delete movie written with ID: ${dataAttribute.id} `);
+      alert("Movie deleted from watchlist");
+      location.reload();
+    } catch (error) {
+      console.error("Error deleting movie: ", error.message);
+    }
+  }
 }

@@ -2,7 +2,7 @@
   --font-logo: "Bowlby One", sans-serif;
   --font-primary: "Inter", system-ui;
   --color-extralight: #fff;
-  --color-light: #cccaca;
+  --color-light: hsl(0, 2%, 60%);
   --color-medium: #484848;
   --color-bold: #23252b;
   --color-extrabold: #000;
@@ -58,12 +58,13 @@ ul {
 }
 
 p {
+  color: var(--color-light);
   line-height: 2.4rem;
 }
 
 input {
   background-color: inherit;
-  border: 1px solid var(--color-light);
+  border: 1px solid var(--color-extralight);
   border-radius: 0.5rem;
   color: var(--color-extralight);
   padding: 1.75rem 4.5rem;
@@ -91,7 +92,7 @@ a {
 }
 
 hr {
-  color: var(--color-medium);
+  color: var(--color-bold);
 }
 
 ::placeholder {
@@ -258,6 +259,7 @@ hr {
   overflow: hidden;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
 .search-logo {
@@ -363,11 +365,12 @@ hr {
 }
 
 .movie-primary {
-  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .movie-poster {
-  width: 30rem;
+  width: 45%;
 }
 
 .movie-secondary {
@@ -415,6 +418,7 @@ hr {
   right: 0;
   top: 0;
   width: 95%;
+  z-index: 2;
 }
 
 .modal-content {
@@ -445,7 +449,7 @@ hr {
   overflow-y: auto;
 }
 
-.watchlist-container {
+.watchlist {
   display: grid;
   gap: 3rem;
 }
@@ -454,6 +458,10 @@ hr {
   font-style: italic;
   opacity: 0.5;
   text-align: center;
+}
+
+.watchlist-movie-container {
+  margin: 4rem 0;
 }
 
 .watchlist-movie {
