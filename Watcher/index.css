@@ -423,6 +423,10 @@ hr {
   z-index: 2;
 }
 
+.watchlist-container {
+  text-align: center;
+}
+
 .modal-content {
   height: 100%;
   width: 100%;
@@ -501,6 +505,12 @@ hr {
 
 .delete-from-watchlist-icon {
   margin-right: 0.25rem;
+}
+
+.empty-watchlist {
+  color: var(--color-medium);
+  font-style: italic;
+  margin: auto;
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

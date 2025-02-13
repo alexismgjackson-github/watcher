@@ -85,6 +85,7 @@ const apiKey = "c073b993bfd587ff8250925f5296110a";
 let watchlistContainer = document.getElementById("watchlist-container");
 const modal = document.getElementById("modal");
 const closeModalBtn = document.getElementById("close-modal-btn");
+const emptyWatchlist = document.getElementById("empty-watchlist");
 
 // ======== UI - Event listeners - LOGGED OUT VIEW (LOGIN)  ============================================================= ////
 
@@ -451,6 +452,8 @@ function closeWatchlistModal() {
 }
 
 function renderMoviesHtmlInWatchlist(watchlistContainer, movieData) {
+  emptyWatchlist.innerHTML = "";
+
   watchlistContainer.innerHTML += `
   <li class="watchlist-movie-container" id="watchlist-movie-container">
       <div class="watchlist-movie" id="watchlist-movie"> 
