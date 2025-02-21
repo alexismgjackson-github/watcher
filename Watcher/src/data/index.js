@@ -396,6 +396,7 @@ function renderFetchedMoviesHtml(searchResultsArr) {
           data-poster="${movie.poster_path}" 
           data-title="${movie.title}"
           data-overview="${movie.overview}"
+          aria-label="Add movie to watchlist"
           >
             <img
                 class="add-to-watchlist-icon"
@@ -474,7 +475,8 @@ function renderMoviesHtmlInWatchlist(watchlistContainer, movieData) {
               data-id="${movieData.id}"
               data-poster="${movieData.poster}" 
               data-title="${movieData.title}"
-              data-overview="${movieData.overview}">
+              data-overview="${movieData.overview}"
+              aria-label="Delete movie from watchlist">
               <img
                 class="delete-from-watchlist-icon"
                 src="/public/assets/icons/delete.svg"
