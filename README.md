@@ -20,7 +20,7 @@ Watcher is a fully responsive app allows that the user to search for movies and 
 
 ## WHY I BUILT THIS
 
-This is the first project I have built. It was inspired by the Scrimba's Movie Watchlist solo project. The original assignment was to build a simple Movie Search app using Javascript and the Open Movie Database API. I decided to enhance the project by overhauling the UI design and decided to pair this project with learning Firebase in-depth. I am a movie fanatic so I use this app often!
+This is the first project I have built. It was inspired by the Scrimba's Movie Watchlist solo project. The original assignment was to build a simple Movie Search app using Javascript and the Open Movie Database API. I decided to enhance the project by overhauling the UI design and decided to pair this project with learning Firebase. I am a movie fanatic so I use this app often!
 
 ## WHAT I LEARNED
 
