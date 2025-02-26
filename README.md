@@ -17,6 +17,7 @@ Watcher is a fully responsive app allows that the user to search for movies and 
 - The Movie Database API
 - Firebase
 - Coolors Color Tool
+- Google Fonts & Icons
 
 ## WHY I BUILT THIS
 
