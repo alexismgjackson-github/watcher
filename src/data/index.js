@@ -77,7 +77,8 @@ const searchResultsCount = document.getElementById("search-results-count");
 const searchResults = document.getElementById("search-results");
 
 const baseUrl = "https://api.themoviedb.org/";
-const apiKEY = "c073b993bfd587ff8250925f5296110a";
+// const apiKEY = "c073b993bfd587ff8250925f5296110a";
+const apiKEY = process.env.MY_API_KEY;
 
 // ======== UI - Elements - LOGGED IN VIEW (WATCHLIST - MODAL)  ============================================================= ////
 
