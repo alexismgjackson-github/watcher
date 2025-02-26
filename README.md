@@ -20,7 +20,7 @@ Watcher is a fully responsive app allows that the user to search for movies and 
 
 ## WHY I BUILT THIS
 
-This is the first project I have built. It was inspired by the Scrimba's Movie Watchlist solo project. The original assignment was to build a simple Movie Search app using Javascript and the Open Movie Database API. I decided to enhance the project by overhauling the UI design and decided to pair this project with learning Firebase. I am a movie fanatic so I use this app often!
+This is the first project I have built. It was inspired by the Scrimba's Movie Watchlist solo project. The original assignment was to build a simple Movie Search app using Javascript and the Open Movie Database API. I decided to level up the project by overhauling the UI design. I paired this project with learning Firebase and opted to using The Movie Database API because I use TMDB when researching movies and I like their documentation more.
 
 ## WHAT I LEARNED
 
@@ -29,8 +29,8 @@ This is the first project I have built. It was inspired by the Scrimba's Movie W
 - Understanding the basics of authentication in web apps.
 - Setting up Firebase in a web app for managing authentication.
 - Implementing user registration using email and password in a secure manner.
-- Enabling users to log in with their email and password and handle authentication forms and errors.
-- Developing the functionality to allow users to log out of the application.
+- Enabling users to log in with their email and password and handling authentication forms and errors.
+- Developing the functionality to allow users to log out of the app.
 
 ### _FIREBASE FIRESTORE_
 
@@ -43,7 +43,7 @@ This is the first project I have built. It was inspired by the Scrimba's Movie W
 
 ### _FETCHING DATA_
 
-- Understanding TMDB API documentation such query parameters and response format.
+- Understanding TMDB API documentation such as query parameters and response format.
 - Fetching data from TMDB API, handling the response and errors.
 - Filtering undesired search results (such as explicit movie content).
 
@@ -51,6 +51,7 @@ This is the first project I have built. It was inspired by the Scrimba's Movie W
 
 - Implementing media queries to add device breakpoints.
 - Using device breakpoints to change orientation, font size, etc.
+- Using CSS Position, Grid and Flexbox.
 
 ### _ACCESSIBILITY_
 
@@ -59,7 +60,7 @@ This is the first project I have built. It was inspired by the Scrimba's Movie W
 
 ## MOST CHALLENGING
 
-- Display the genres - the data response from TMDB API only gave the genre IDS (numbers) but not the matching genre name (text). I ended up find that information on TMDB's API Support and Stackoverflow and displayed the genres using Switch Statements.
+- Displaying the genres - the data response from TMDB API only gave the genre IDS (numbers) but not the matching genre name (text). I ended up finding that information on TMDB's API Support and Stackoverflow and displayed the genres using Switch Statements.
 
 ## BUGS
 
