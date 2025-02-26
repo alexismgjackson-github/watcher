@@ -1,19 +1,19 @@
 # _WATCHER - MOVIE WATCHLIST APP_
 
-Watcher is a fully responsive app allows that the user to search for movies and create their own watch list. This project was inspired by a solo project on the learning platform Scrimba.
+Watcher is a fully responsive app allows that the user to search for movies and create their own watch list.
 
 ## FEATURES
 
 - Firebase Authentication
 - Firebase Firestore
 - Movie Searchbar
-- Movie Watchlist
+- Movie Watchlist Modal
 
 ## TECHNOLOGIES
 
 - HTML
 - CSS
-- Vanilla Javascript
+- Javascript
 - The Movie Database API
 - Firebase
 - Coolors Color Tool
