@@ -27,37 +27,37 @@ This is the first project I have built as a Frontend Developer. It was inspired 
 
 ### _FIREBASE AUHTENTICATION_
 
-- Understanding the basics of authentication in web apps.
-- Setting up Firebase in a web app for managing authentication.
-- Implementing user registration using email and password in a secure manner.
-- Enabling users to log in with their email and password and handling authentication forms and errors.
-- Developing the functionality to allow users to log out of the app.
+- Understanding the basics of authentication in web apps
+- Setting up Firebase in a web app for managing authentication
+- Implementing user registration using email and password in a secure manner
+- Enabling users to log in with their email and password and handling authentication forms and errors
+- Developing the functionality to allow users to log out of the app
 
 ### _FIREBASE FIRESTORE_
 
-- Understanding the basics of Cloud Firestore in managing app data.
-- Setting up Cloud Firestore and configuring it for use alongside Firebase Authenticaton.
-- Creating security rules to restrict read and write access to authenticated users.
-- Adding object datatypes via setDoc.
-- Removing object datatypes via deleteDoc.
-- Updating in the app via onSnapshot.
+- Understanding the basics of Cloud Firestore in managing app data
+- Setting up Cloud Firestore and configuring it for use alongside Firebase Authenticaton
+- Creating security rules to restrict read and write access to authenticated users
+- Adding object datatypes via setDoc
+- Removing object datatypes via deleteDoc
+- Updating in the app via onSnapshot
 
 ### _FETCHING DATA_
 
-- Understanding TMDB API documentation such as query parameters and response format.
-- Fetching data from TMDB API, handling the response and errors.
-- Filtering undesired search results (such as explicit movie content).
+- Understanding TMDB API documentation such as query parameters and response format
+- Fetching data from TMDB API, handling the response and errors
+- Filtering undesired search results (such as explicit movie content)
 
 ### _RESPONSIVE WEB DESIGN_
 
-- Implementing media queries to add device breakpoints.
-- Using device breakpoints to change orientation, font size, etc.
-- Using CSS Position, Grid and Flexbox.
+- Implementing media queries to add device breakpoints
+- Using device breakpoints to change orientation, font size, etc
+- Using CSS Position, Grid and Flexbox
 
 ### _ACCESSIBILITY_
 
-- Calculating the contrast ratio of text, icons and background colors using Coolors' Color Contrast Checker.
-- Adding aria-labels and alt tags to buttons, icons, images, etc.
+- Calculating the contrast ratio of text, icons and background colors using Coolors' Color Contrast Checker
+- Adding aria-labels and alt tags to buttons, icons, images, etc
 
 ## MOST CHALLENGING
 
@@ -65,12 +65,12 @@ This is the first project I have built as a Frontend Developer. It was inspired 
 
 ## BUGS
 
-- I have not been able to resolve the issue of the genres only displaying in the search results and not in the watchlist.
-- I have to use location.reload() to force the app to update with the changes made to the database.
+- I have not been able to resolve the issue of the genres only displaying in the search results and not in the watchlist
+- I have to use location.reload() to force the app to update with the changes made to the database
 
 ## FUTURE UPDATES
 
-- Solve existing bugs.
-- Convert app from JavaScript to React and React Router.
-- Add filtering of movies via genres in the watchlist.
-- Toggle completed of movies in the watchlist.
+- Solve existing bugs
+- Convert app from JavaScript to React and React Router
+- Add filtering of movies via genres in the watchlist
+- Toggle completed of movies in the watchlist
