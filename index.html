@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watcher</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <!-- LOGGED OUT VIEW (LOGIN) -->
+
+      <section class="logged-out-view-login" id="logged-out-view-login">
+        <nav class="login-nav">
+          <span class="logo">WATCHER</span>
+        </nav>
+        <div class="decorative-icon-container">
+          <span
+            ><img
+              class="movie-icon"
+              src="public/assets/icons/movie.png"
+              alt="movie icon"
+            />
+          </span>
+        </div>
+        <div class="authentication-container">
+          <div class="authentication login">
+            <h1 class="login-heading">Log In</h1>
+            <section
+              class="user-auth-container"
+              id="user-auth-container"
+            ></section>
+            <input
+              id="login-email-input"
+              class="login-email-input"
+              type="email"
+              placeholder="Email"
+              aria-label="Enter your email"
+              aria-required="true"
+            />
+            <input
+              id="login-password-input"
+              class="login-password-input"
+              type="password"
+              placeholder="Password"
+              pattern=".{8,}"
+              aria-label="Enter your password"
+              aria-required="true"
+            />
+            <button
+              id="login-show-password-btn"
+              class="login-show-password-btn"
+              aria-label="Show or hide password"
+            >
+              <img
+                class="show-password-icon"
+                src="public/assets/icons/visibility.svg"
+                alt="Eye shaped icon"
+              />
+              Show Password
+            </button>
+            <button
+              id="login-btn"
+              class="login-btn"
+              type="submit"
+              aria-label="Log into account"
+            >
+              Log In
+            </button>
+            <button
+              id="view-register-auth-btn"
+              class="view-register-auth-btn"
+              aria-label="Get registered"
+            >
+              New User? Register Here
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOGGED OUT VIEW (REGISTER)-->
+
+      <section class="logged-out-view-register" id="logged-out-view-register">
+        <nav class="register-nav">
+          <span class="logo">WATCHER</span>
+        </nav>
+        <div class="decorative-icon-container">
+          <span
+            ><img
+              class="movie-icon"
+              src="public/assets/icons/movie.png"
+              alt="movie icon"
+            />
+          </span>
+        </div>
+        <div class="authentication-container">
+          <div class="authentication register">
+            <h1 class="register-heading">Register</h1>
+            <input
+              id="register-email-input"
+              class="register-email-input"
+              type="email"
+              placeholder="Email"
+              aria-label="Enter a valid email"
+              aria-required="true"
+            />
+            <section
+              class="email-auth-container"
+              id="email-auth-container"
+            ></section>
+            <input
+              id="register-password-input"
+              class="register-password-input"
+              type="password"
+              placeholder="Password"
+              pattern=".{6,}"
+              aria-label="Enter password - it must contain 6 or more characters"
+              aria-required="true"
+            />
+            <section
+              class="password-auth-container"
+              id="password-auth-container"
+            ></section>
+            <button
+              id="register-show-password-btn"
+              class="register-show-password-btn"
+            >
+              <img
+                class="show-password-icon"
+                src="public/assets/icons/visibility.svg"
+                alt="Eye shaped icon"
+              />
+              Show Password
+            </button>
+            <button
+              id="signup-btn"
+              class="signup-btn"
+              type="submit"
+              aria-label="Log into account"
+            >
+              Sign Up
+            </button>
+            <button
+              id="view-login-auth-btn"
+              class="view-login-auth-btn"
+              aria-label="Show login"
+            >
+              Already A User? Log In Here
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOGGED IN VIEW (SEARCH) -->
+
+      <section class="logged-in-view" id="logged-in-view">
+        <nav class="search-nav" id="search-nav">
+          <div class="search-nav-primary">
+            <span class="logo">WATCHER</span>
+          </div>
+          <div class="search-nav-secondary">
+            <div class="search-nav-btns">
+              <button
+                id="view-watchlist-btn"
+                class="view-watchlist-btn"
+                aria-label="View Watchlist"
+              >
+                <span class="material-symbols-outlined view-list">
+                  view_list
+                </span>
+              </button>
+              <button
+                id="logout-btn"
+                class="logout-btn"
+                type="submit"
+                aria-label="Log out of account"
+              >
+                <span class="material-symbols-outlined logout"> logout </span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <div class="search-container">
+          <div class="search">
+            <h1 class="search-heading">Find a movie</h1>
+            <form id="search-form" class="search-form" role="search">
+              <div
+                id="search-bar-message-container"
+                class="search-bar-message-container"
+              ></div>
+              <input
+                id="search-bar"
+                class="search-bar"
+                type="text"
+                placeholder="e.g. The Wild Robot"
+                aria-label="Enter a movie title into search bar"
+                aria-required="true"
+                required
+              />
+              <div class="search-btn-container">
+                <button
+                  id="search-btn"
+                  class="search-btn"
+                  aria-label="Search movie title entered into search bar"
+                >
+                  Search Movie
+                </button>
+              </div>
+            </form>
+            <div class="search-results-count-container">
+              <span
+                class="search-results-count"
+                id="search-results-count"
+              ></span>
+            </div>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- LOGGED IN VIEW (WATCHLIST - MODAL) -->
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-heading">Your Watchlist</h2>
+          <button
+            id="close-modal-btn"
+            class="close-modal-btn"
+            aria-label="Close Watchlist"
+          >
+            <img
+              src="public/assets/icons/cancel.svg"
+              alt="Close icon"
+              aria-label="Close watchlist modal"
+            />
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul id="watchlist-container" class="watchlist-container">
+            <li class="empty-watchlist" id="empty-watchlist">
+              It's looking a little empty
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="./src/data/index.js" type="module"></script>
+  </body>
+</html>
